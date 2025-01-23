@@ -19,7 +19,7 @@ public class Zephyr {
         System.out.println(greetingMessage);
 
         // Detect user input in cli
-        java.util.Scanner scanner = new java.util.Scanner(System.in);
+        FastScanner scanner = new FastScanner();
         String userInput = scanner.nextLine();
         // Case is ignored to allow for case-insensitive input
         while (!userInput.equalsIgnoreCase("bye")) {
