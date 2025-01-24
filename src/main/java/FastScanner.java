@@ -38,15 +38,22 @@ public class FastScanner {
      * @return The string read until the delimiter
      */
     String nextUntil(String delimiter) {
+        if (st == null || !st.hasMoreElements()) {
+            return "";
+        }
         StringBuilder sb = new StringBuilder();
-        while (true) {
-            String s = nextString();
-            if (s.equals(delimiter)) {
+        boolean delimiterFound = false;
+        while (st.hasMoreElements()) {
+            String token = st.nextToken();
+            if (token.endsWith(delimiter)) {
+                // Remove the delimiter from the token and append to sb
+                sb.append(token, 0, token.length() - delimiter.length());
+                delimiterFound = true;
                 break;
             }
-            sb.append(s).append(" ");
+            sb.append(token).append(" ");
         }
-        return sb.toString().trim();
+        return delimiterFound ? sb.toString().trim() : "";
     }
 
     String remainingLine() {
