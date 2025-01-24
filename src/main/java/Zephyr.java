@@ -80,6 +80,7 @@ public class Zephyr {
                 System.out.println("Got it. I've added this task:");
                 System.out.println(eventTask);
                 System.out.println("____________________________________________________________");
+                break;
             default:
                 String defaultDescription = userInput + " " +
                         scanner.remainingLine();
