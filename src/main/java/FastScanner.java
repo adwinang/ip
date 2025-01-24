@@ -32,6 +32,34 @@ public class FastScanner {
         return "";
     }
 
+    /**
+     * Read until the delimiter is found or until end of line
+     * @param delimiter Defines the string to detect to stop reading
+     * @return The string read until the delimiter
+     */
+    String nextUntil(String delimiter) {
+        StringBuilder sb = new StringBuilder();
+        while (true) {
+            String s = nextString();
+            if (s.equals(delimiter)) {
+                break;
+            }
+            sb.append(s).append(" ");
+        }
+        return sb.toString().trim();
+    }
+
+    String remainingLine() {
+        if (st == null || !st.hasMoreElements()) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        while (st.hasMoreElements()) {
+            sb.append(st.nextToken()).append(" ");
+        }
+        return sb.toString().trim();
+    }
+
     int nextInt() {
         return Integer.parseInt(nextString());
     }
