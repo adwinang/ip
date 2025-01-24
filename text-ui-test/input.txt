@@ -1,0 +1,9 @@
+todo homework
+deadline Assignnment 1 /by Sunday
+event Convention /from Monday morning /to Sunday night
+mark 1
+mark 2
+unmark 1
+unmark 3
+default behaviour is to simply just add as a simple task
+bye
