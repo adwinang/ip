@@ -81,10 +81,12 @@ public class Zephyr {
                 System.out.println(eventTask);
                 System.out.println("____________________________________________________________");
             default:
-                tasks[taskCount] = new Task(userInput);
+                String defaultDescription = userInput + " " +
+                        scanner.remainingLine();
+                tasks[taskCount] = new Task(defaultDescription);
                 taskCount++;
                 System.out.println("____________________________________________________________");
-                System.out.println("Added: " + userInput);
+                System.out.println("Added: " + defaultDescription);
                 System.out.println("____________________________________________________________");
                 break;
             }
