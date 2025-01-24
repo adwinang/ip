@@ -20,7 +20,7 @@ public class Zephyr {
 
         // Detect user input in cli
         FastScanner scanner = new FastScanner();
-        String userInput = scanner.nextLine();
+        String userInput = scanner.nextString();
         // Case is ignored to allow for case-insensitive input
         while (!userInput.equalsIgnoreCase("bye")) {
             switch (userInput.toLowerCase()) {
@@ -48,11 +48,43 @@ public class Zephyr {
                 System.out.println(tasks[unmarkNumber - 1].toString());
                 System.out.println("____________________________________________________________");
                 break;
+            case "todo":
+                String description = scanner.remainingLine();
+                Todo task = new Todo(description);
+                tasks[taskCount] = task;
+                taskCount++;
+                System.out.println("____________________________________________________________");
+                System.out.println("Got it. I've added this task:");
+                System.out.println(task);
+                System.out.println("____________________________________________________________");
+                break;
+            case "deadline":
+                String deadlineDescription = scanner.nextUntil("/by");
+                String by = scanner.remainingLine();
+                Deadline deadlineTask = new Deadline(deadlineDescription, by);
+                tasks[taskCount] = deadlineTask;
+                taskCount++;
+                System.out.println("____________________________________________________________");
+                System.out.println("Got it. I've added this task:");
+                System.out.println(deadlineTask);
+                System.out.println("____________________________________________________________");
+                break;
+            case "event":
+                String eventDescription = scanner.nextUntil("/from");
+                String from = scanner.nextUntil("/to");
+                String to = scanner.remainingLine();
+                Event eventTask = new Event(eventDescription, from, to);
+                tasks[taskCount] = eventTask;
+                taskCount++;
+                System.out.println("____________________________________________________________");
+                System.out.println("Got it. I've added this task:");
+                System.out.println(eventTask);
+                System.out.println("____________________________________________________________");
             default:
                 tasks[taskCount] = new Task(userInput);
                 taskCount++;
                 System.out.println("____________________________________________________________");
-                System.out.println("added: " + userInput);
+                System.out.println("Added: " + userInput);
                 System.out.println("____________________________________________________________");
                 break;
             }
