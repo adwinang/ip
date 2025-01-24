@@ -1,6 +1,37 @@
 import java.util.ArrayList;
 
 public class Zephyr {
+
+    public enum Command {
+        LIST("list"),
+        MARK("mark"),
+        UNMARK("unmark"),
+        TODO("todo"),
+        DEADLINE("deadline"),
+        EVENT("event"),
+        DELETE("delete"),
+        BYE("bye"),
+        UNKNOWN("unknown");
+
+
+        private final String value;
+
+        // Constructor to associate string values
+        Command(String value) {
+            this.value = value;
+        }
+
+        // Method to get enum from string
+        public static Command fromValue(String value) {
+            for (Command command : Command.values()) {
+                if (command.value.equalsIgnoreCase(value)) {
+                    return command;
+                }
+            }
+            return UNKNOWN;
+        }
+    }
+
     public static void main(String[] args) {
         String greetingMessage= """
                 ____________________________________________________________
@@ -25,8 +56,8 @@ public class Zephyr {
         // Case is ignored to allow for case-insensitive input
         while (!userInput.equalsIgnoreCase("bye")) {
             try {
-                switch (userInput.toLowerCase()) {
-                case "list":
+                switch (Command.fromValue(userInput)) {
+                case LIST:
                     System.out.println("____________________________________________________________");
                     System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < taskList.size(); i++) {
@@ -34,7 +65,7 @@ public class Zephyr {
                     }
                     System.out.println("____________________________________________________________");
                     break;
-                case "mark":
+                case MARK:
                     int markNumber;
                     try {
                         markNumber = scanner.nextInt();
@@ -54,7 +85,7 @@ public class Zephyr {
                     System.out.println(taskList.get(markNumber).toString());
                     System.out.println("____________________________________________________________");
                     break;
-                case "unmark":
+                case UNMARK:
                     int unmarkNumber;
                     try {
                         unmarkNumber = scanner.nextInt();
@@ -74,7 +105,7 @@ public class Zephyr {
                     System.out.println(taskList.get(unmarkNumber).toString());
                     System.out.println("____________________________________________________________");
                     break;
-                case "todo":
+                case TODO:
                     String description = scanner.remainingLine();
                     if (description.isBlank()) {
                         throw new ZephyrException("Todo description cannot be empty.");
@@ -86,7 +117,7 @@ public class Zephyr {
                     System.out.println(task);
                     System.out.println("____________________________________________________________");
                     break;
-                case "deadline":
+                case DEADLINE:
                     String deadlineDescription = scanner.nextUntil("/by");
                     if (deadlineDescription.isBlank()) {
                         throw new ZephyrException("Deadline description cannot be empty or /by is missing.");
@@ -102,7 +133,7 @@ public class Zephyr {
                     System.out.println(deadlineTask);
                     System.out.println("____________________________________________________________");
                     break;
-                case "event":
+                case EVENT:
                     String eventDescription = scanner.nextUntil("/from");
                     if (eventDescription.isBlank()) {
                         throw new ZephyrException("Event description cannot be empty.");
@@ -122,7 +153,7 @@ public class Zephyr {
                     System.out.println(eventTask);
                     System.out.println("____________________________________________________________");
                     break;
-                case "delete":
+                case DELETE:
                     int deleteNumber;
                     try {
                         deleteNumber = scanner.nextInt();
