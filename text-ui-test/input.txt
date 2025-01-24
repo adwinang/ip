@@ -1,6 +1,10 @@
 todo homework
+deadline
 deadline Assignnment 1 /by Sunday
+deadline Assignnment 1
 event Convention /from Monday morning /to Sunday night
+event
+event Convention /from Monday morning
 mark 1
 mark 2
 unmark 1

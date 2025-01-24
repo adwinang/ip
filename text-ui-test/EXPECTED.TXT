@@ -7,14 +7,18 @@ ____________________________________________________________
 Got it. I've added this task:
 [T][ ] homework
 ____________________________________________________________
+Deadline description cannot be empty or /by is missing.
 ____________________________________________________________
 Got it. I've added this task:
 [D][ ] Assignnment 1 (by: Sunday)
 ____________________________________________________________
+Deadline description cannot be empty or /by is missing.
 ____________________________________________________________
 Got it. I've added this task:
 [E][ ] Convention (from: Monday morning at: Sunday night)
 ____________________________________________________________
+Event description cannot be empty.
+Event start time cannot be empty.
 ____________________________________________________________
 Nice! I've marked this task as done:
 [T][X] homework
@@ -31,9 +35,15 @@ ____________________________________________________________
 Nice! I've marked this task as undone:
 [E][ ] Convention (from: Monday morning at: Sunday night)
 ____________________________________________________________
-____________________________________________________________
-Added: default behaviour is to simply just add as a simple task
-____________________________________________________________
+I do not understand what thou art saying.
+Please enter a valid command using the follow:
+1. list
+2. mark <task number>
+3. unmark <task number>
+4. todo <task description>
+5. deadline <task description> /by <deadline>
+6. event <task description> /from <start time> /to <end time>
+
 ____________________________________________________________
  Bye. Hope to see thou again soon!
 ____________________________________________________________
