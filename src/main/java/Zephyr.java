@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.nio.file.Paths;
+import java.nio.file.Files;
 
 public class Zephyr {
 
@@ -33,13 +35,13 @@ public class Zephyr {
     }
 
     public static void main(String[] args) {
-        String greetingMessage= """
+        String GREETING_MESSAGE= """
                 ____________________________________________________________
                  Hello! I'm Zephyr
                  What can I do for thou?
                 ____________________________________________________________
                 """;
-        String goodbyeMessage= """
+        String GOODBYE_MESSAGE= """
                 ____________________________________________________________
                  Bye. Hope to see thou again soon!
                 ____________________________________________________________
@@ -48,7 +50,7 @@ public class Zephyr {
         // Assumption of max 100 tasks to store
         ArrayList<Task> taskList = new ArrayList<>();
 
-        System.out.println(greetingMessage);
+        System.out.println(GREETING_MESSAGE);
 
         // Detect user input in cli
         FastScanner scanner = new FastScanner();
@@ -196,6 +198,6 @@ public class Zephyr {
             userInput = scanner.nextString();
         }
 
-        System.out.println(goodbyeMessage);
+        System.out.println(GOODBYE_MESSAGE);
     }
 }
