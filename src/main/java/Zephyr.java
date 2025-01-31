@@ -174,6 +174,12 @@ public class Zephyr {
             try {
                 switch (Command.fromValue(userInput)) {
                 case LIST:
+                    if (taskArray.isEmpty()) {
+                        System.out.println("____________________________________________________________");
+                        System.out.println("There are no tasks in your list.");
+                        System.out.println("____________________________________________________________");
+                        break;
+                    }
                     System.out.println("____________________________________________________________");
                     System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < taskArray.size(); i++) {
@@ -273,12 +279,12 @@ public class Zephyr {
                         System.out.print(j + 1 + ". ");
                         if (task instanceof Deadline deadlineTask) {
                             long daysUntil = ChronoUnit.DAYS.between(currentDate, deadlineTask.by);
-                            System.out.println(deadlineTask);
-                            System.out.println("    Days until deadline: " + daysUntil);
+                            System.out.print(deadlineTask);
+                            System.out.println(" - Days until deadline: " + daysUntil);
                         } else if (task instanceof Event eventTask) {
                             long daysUntil = ChronoUnit.DAYS.between(currentDate, eventTask.from);
-                            System.out.println(eventTask);
-                            System.out.println("    Days until event: " + daysUntil);
+                            System.out.print(eventTask);
+                            System.out.println(" - Days until event: " + daysUntil);
                         }
                     }
                     System.out.println("____________________________________________________________");
