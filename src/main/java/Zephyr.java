@@ -1,4 +1,9 @@
+import java.io.IOException;
 import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.util.stream.Stream;
 
 public class Zephyr {
 
@@ -32,14 +37,99 @@ public class Zephyr {
         }
     }
 
+    public static void saveToFile(String relativeFolder, String fileName, String content) {
+        try {
+            // Construct the relative path
+            Path directoryPath = Path.of(relativeFolder);
+            Path filePath = directoryPath.resolve(fileName); // Combines folder + filename
+
+            // Ensure the directory exists (creates if missing)
+            Files.createDirectories(directoryPath);
+
+            // Write content to the file (creating or replacing it)
+            Files.writeString(filePath, content, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+
+            System.out.println("File saved at: " + filePath.toAbsolutePath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Parse a line of text into a Task object
+     * @param line The line of text to parse
+     * @return Task object or null if parsing fails
+     */
+    public static Task parseLine(String line) {
+        // 1. Basic length check to avoid StringIndexOutOfBounds
+        //    Minimum valid example is: "- [ ] X: " (8 chars before content)
+        if (line == null || line.length() < 8) {
+            return null;
+        }
+
+        // 2. Must start with "- ["
+        if (!line.startsWith("- [")) {
+            return null;
+        }
+
+        // 3. Check the 'X' or ' ' for the check mark (index 3)
+        char checkMark = line.charAt(3);
+        if (checkMark != 'X' && checkMark != ' ') {
+            return null;
+        }
+
+        // 4. The next character must be ']' at index 4
+        if (line.charAt(4) != ']') {
+            return null;
+        }
+
+        // 5. Next must be space at index 5
+        if (line.charAt(5) != ' ') {
+            return null;
+        }
+
+        // 6. Next, a single-letter code at index 6 (e.g., D, E, T, etc.)
+        char letter = line.charAt(6);
+        if (!Character.isLetter(letter)) {
+            return null;
+        }
+
+        // 7. Next must be ':' at index 7
+        if (line.charAt(7) != ':') {
+            return null;
+        }
+
+        // 8. Next must be a space at index 8
+        if (line.charAt(8) != ' ') {
+            return null;
+        }
+
+        // 9. Everything after index 8 + 1 = 9 is the content
+        String content = line.substring(9).trim();
+
+        // 10. Create your Task-like object
+        boolean isDone = (checkMark == 'X');
+        Task task;
+        task = switch (letter) {
+            case 'T' -> Todo.parseString(content);
+            case 'D' -> Deadline.parseString(content);
+            case 'E' -> Event.parseString(content);
+            default -> null;
+        };
+        if (task != null && isDone) {
+            task.markAsDone();
+        }
+        return task;
+    }
+
     public static void main(String[] args) {
-        String greetingMessage= """
+        String GREETING_MESSAGE= """
                 ____________________________________________________________
                  Hello! I'm Zephyr
                  What can I do for thou?
                 ____________________________________________________________
                 """;
-        String goodbyeMessage= """
+        String GOODBYE_MESSAGE= """
                 ____________________________________________________________
                  Bye. Hope to see thou again soon!
                 ____________________________________________________________
@@ -48,7 +138,24 @@ public class Zephyr {
         // Assumption of max 100 tasks to store
         ArrayList<Task> taskList = new ArrayList<>();
 
-        System.out.println(greetingMessage);
+        Path folderPath = Path.of("data");
+        Path filePath = folderPath.resolve("tasks.md");
+
+        if (Files.exists(folderPath) && Files.exists(filePath)) {
+            try (Stream<String> lines = Files.lines(filePath)) {
+                lines.forEach(line -> {
+                    Task task = parseLine(line);
+                    if (task != null) {
+                        taskList.add(task);
+                    }
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        System.out.println(GREETING_MESSAGE);
 
         // Detect user input in cli
         FastScanner scanner = new FastScanner();
@@ -196,6 +303,11 @@ public class Zephyr {
             userInput = scanner.nextString();
         }
 
-        System.out.println(goodbyeMessage);
+        StringBuilder output = new StringBuilder();
+        for (Task task : taskList) {
+            output.append(task.toMarkdownString()).append("\n");
+        }
+        saveToFile("data", "tasks.md", output.toString());
+        System.out.println(GOODBYE_MESSAGE);
     }
 }
