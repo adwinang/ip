@@ -12,4 +12,15 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (from: " + this.from + " at: " + this.to + ")";
     }
+
+    @Override
+    protected String toMarkdownStringInternal(String details) {
+        return super.toMarkdownStringInternal("E: " + details);
+    }
+
+    @Override
+    public String toMarkdownString() {
+        return this.toMarkdownStringInternal(this.description + " (from: " + this.from + " at: " + this.to + ")");
+    }
+
 }

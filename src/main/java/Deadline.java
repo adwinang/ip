@@ -10,4 +10,14 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.by + ")";
     }
+
+    @Override
+    protected String toMarkdownStringInternal(String details) {
+        return super.toMarkdownStringInternal("D: " + details);
+    }
+
+    public String toMarkdownString() {
+        return this.toMarkdownStringInternal(this.description + " (by: " + this.by + ")");
+    }
+
 }
