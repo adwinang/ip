@@ -33,5 +33,5 @@ public abstract class Task {
         return "- [" + this.getStatusIcon() + "] " + details;
     }
 
-    abstract public String toMarkdownString();
+    public abstract String toMarkdownString();
 }

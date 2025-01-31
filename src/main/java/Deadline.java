@@ -26,7 +26,7 @@ public class Deadline extends Task {
      * @param partialString The markdown string after the '- [ ] D: ' part
      * @return Returns Deadline or null if the string is not a valid Deadline
      */
-    static public Deadline parseString(String partialString) {
+    public static Deadline parseString(String partialString) {
         String[] details = partialString.split(" \\(by: ", 2);
         if (details.length < 2) {
             return null;

@@ -30,7 +30,7 @@ public class Event extends Task {
      * @param partialString The markdown string to parse after the '- [ ] E: ' part
      * @return Returns Event or null if the string is not a valid Event
      */
-    static public Event parseString(String partialString) {
+    public static Event parseString(String partialString) {
         String[] details = partialString.split(" \\(from: ", 2);
         if (details.length < 2) {
             return null;
