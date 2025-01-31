@@ -218,7 +218,69 @@ public class Zephyr {
                     taskArray.get(unmarkNumber).markAsUndone();
                     System.out.println("____________________________________________________________");
                     System.out.println("Nice! I've marked this task as undone:");
-                    System.out.println(taskList.get(unmarkNumber).toString());
+                    System.out.println(taskArray.get(unmarkNumber).toString());
+                    System.out.println("____________________________________________________________");
+                    break;
+                case UPCOMING:
+                    String remainingLine = scanner.remainingLine();
+                    String[] remainingLineSplit = remainingLine.split(" ");
+                    if (remainingLineSplit.length != 2) {
+                        throw new ZephyrException("Please enter a task type and a range of days in the following format: <task type> <days>");
+                    }
+                    String taskType = remainingLineSplit[0];
+                    if (!taskType.equalsIgnoreCase("deadline") && !taskType.equalsIgnoreCase("event")) {
+                        throw new ZephyrException("Task type must be either deadline or event.");
+                    }
+
+                    int daysRange;
+                    try {
+                        daysRange = Integer.parseInt(remainingLineSplit[1]);
+                    } catch (NumberFormatException e) {
+                        throw new ZephyrException("Thou must input a range of days as an integer.");
+                    }
+
+                    LocalDate currentDate = LocalDate.now();
+
+                    Task[] taskList = new Task[taskArray.size()];
+                    int i = 0;
+                    for (Task task : taskArray) {
+                        if (taskType.equalsIgnoreCase("deadline") && task instanceof Deadline deadlineTask) {
+                            long daysUntil = ChronoUnit.DAYS.between(currentDate, deadlineTask.by);
+                            if (daysUntil > 0 && daysUntil <= daysRange) {
+                                taskList[i] = deadlineTask;
+                                i++;
+                            }
+                        } else if (taskType.equalsIgnoreCase("event") && task instanceof Event eventTask) {
+                            long daysUntil = ChronoUnit.DAYS.between(currentDate, eventTask.from);
+                            if (daysUntil > 0 && daysUntil <= daysRange) {
+                                taskList[i] = eventTask;
+                                i++;
+                            }
+                        }
+                    }
+                    if (i == 0) {
+                        System.out.println("____________________________________________________________");
+                        System.out.println("There are no upcoming tasks for thou.");
+                        System.out.println("____________________________________________________________");
+                        break;
+                    }
+
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Here are the upcoming " + taskType + " tasks within " + daysRange + " days:");
+
+                    for (int j = 0; j < i; j++) {
+                        Task task = taskList[j];
+                        System.out.print(j + 1 + ". ");
+                        if (task instanceof Deadline deadlineTask) {
+                            long daysUntil = ChronoUnit.DAYS.between(currentDate, deadlineTask.by);
+                            System.out.println(deadlineTask);
+                            System.out.println("    Days until deadline: " + daysUntil);
+                        } else if (task instanceof Event eventTask) {
+                            long daysUntil = ChronoUnit.DAYS.between(currentDate, eventTask.from);
+                            System.out.println(eventTask);
+                            System.out.println("    Days until event: " + daysUntil);
+                        }
+                    }
                     System.out.println("____________________________________________________________");
                     break;
                 case TODO:
