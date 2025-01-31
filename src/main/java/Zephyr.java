@@ -1,9 +1,14 @@
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.stream.Stream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 
 public class Zephyr {
 
@@ -15,6 +20,7 @@ public class Zephyr {
         DEADLINE("deadline"),
         EVENT("event"),
         DELETE("delete"),
+        UPCOMING("upcoming"),
         BYE("bye"),
         UNKNOWN("unknown");
 
@@ -135,6 +141,9 @@ public class Zephyr {
                 ____________________________________________________________
                 """;
 
+        // LocalDate formatter
+        DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
         // Assumption of max 100 tasks to store
         ArrayList<Task> taskList = new ArrayList<>();
 
@@ -230,10 +239,11 @@ public class Zephyr {
                         throw new ZephyrException("Deadline description cannot be empty or /by is missing.");
                     }
                     String by = scanner.remainingLine();
+                    LocalDate byDate = LocalDate.parse(by, FORMATTER);
                     if (by.isBlank()) {
                         throw new ZephyrException("Deadline by cannot be empty.");
                     }
-                    Deadline deadlineTask = new Deadline(deadlineDescription, by);
+                    Deadline deadlineTask = new Deadline(deadlineDescription, byDate);
                     taskList.add(deadlineTask);
                     System.out.println("____________________________________________________________");
                     System.out.println("Got it. I've added this task:");
@@ -246,14 +256,16 @@ public class Zephyr {
                         throw new ZephyrException("Event description cannot be empty.");
                     }
                     String from = scanner.nextUntil("/to");
+                    LocalDate fromDate = LocalDate.parse(from, FORMATTER);
                     if (from.isBlank()) {
                         throw new ZephyrException("Event start time cannot be empty.");
                     }
                     String to = scanner.remainingLine();
+                    LocalDate toDate = LocalDate.parse(to, FORMATTER);
                     if (to.isBlank()) {
                         throw new ZephyrException("Event end time cannot be empty.");
                     }
-                    Event eventTask = new Event(eventDescription, from, to);
+                    Event eventTask = new Event(eventDescription, fromDate, toDate);
                     taskList.add(eventTask);
                     System.out.println("____________________________________________________________");
                     System.out.println("Got it. I've added this task:");
@@ -299,6 +311,8 @@ public class Zephyr {
                 }
             } catch (ZephyrException e) {
                 System.out.println(e.getMessage());
+            } catch (DateTimeParseException e) {
+                System.out.println("Please enter a valid date in the format yyyy-MM-dd");
             }
             userInput = scanner.nextString();
         }

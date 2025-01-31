@@ -1,14 +1,21 @@
-public class Deadline extends Task {
-    protected String by;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
-    public Deadline(String description, String by) {
+public class Deadline extends Task {
+    protected LocalDate by;
+
+    public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        return "[D]" + super.toString() + " (by: " + this.getBy() + ")";
+    }
+
+    public String getBy() {
+        return Deadline.parseDate(this.by);
     }
 
     @Override
@@ -17,7 +24,7 @@ public class Deadline extends Task {
     }
 
     public String toMarkdownString() {
-        return this.toMarkdownStringInternal(this.description + " (by: " + this.by + ")");
+        return this.toMarkdownStringInternal(this.description + " (by: " + this.getBy() + ")");
     }
 
     /**
@@ -26,14 +33,18 @@ public class Deadline extends Task {
      * @param partialString The markdown string after the '- [ ] D: ' part
      * @return Returns Deadline or null if the string is not a valid Deadline
      */
-    public static Deadline parseString(String partialString) {
+    public static Deadline parseString(String partialString){
         String[] details = partialString.split(" \\(by: ", 2);
         if (details.length < 2) {
             return null;
         }
         String description = details[0];
         String by = details[1].substring(0, details[1].length() - 1);
-        return new Deadline(description, by);
+        try {
+            LocalDate byDate = LocalDate.parse(by, Task.getFormatter());
+            return new Deadline(description, byDate);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
     }
-
 }

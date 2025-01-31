@@ -1,8 +1,11 @@
-public class Event extends Task {
-    protected String from;
-    protected String to;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
-    public Event(String description, String from, String to) {
+public class Event extends Task {
+    protected LocalDate from;
+    protected LocalDate to;
+
+    public Event(String description, LocalDate from, LocalDate to) {
         super(description);
         this.from = from;
         this.to = to;
@@ -10,7 +13,15 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.from + " at: " + this.to + ")";
+        return "[E]" + super.toString() + " (from: " + this.getFrom() + " at: " + this.getTo() + ")";
+    }
+
+    public String getFrom() {
+        return Event.parseDate(this.from);
+    }
+
+    public String getTo() {
+        return Event.parseDate(this.to);
     }
 
     @Override
@@ -20,7 +31,7 @@ public class Event extends Task {
 
     @Override
     public String toMarkdownString() {
-        return this.toMarkdownStringInternal(this.description + " (from: " + this.from + " at: " + this.to + ")");
+        return this.toMarkdownStringInternal(this.description + " (from: " + this.getFrom() + " at: " + this.getTo() + ")");
     }
 
     /**
@@ -40,11 +51,18 @@ public class Event extends Task {
         if (fromTo.length < 2) {
             return null;
         }
-        String from = fromTo[0];
-        if (!fromTo[1].endsWith(")")) {
+        try {
+            String from = fromTo[0];
+            if (!fromTo[1].endsWith(")")) {
+                return null;
+            }
+            LocalDate fromDate = LocalDate.parse(from, Task.getFormatter());
+            String to = fromTo[1].substring(0, fromTo[1].length() - 1);
+            LocalDate toDate = LocalDate.parse(to, Task.getFormatter());
+            return new Event(description, fromDate, toDate);
+        } catch (DateTimeParseException e) {
             return null;
         }
-        String to = fromTo[1].substring(0, fromTo[1].length() - 1);
-        return new Event(description, from, to);
+
     }
 }
