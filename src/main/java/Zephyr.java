@@ -145,7 +145,7 @@ public class Zephyr {
         DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         // Assumption of max 100 tasks to store
-        ArrayList<Task> taskList = new ArrayList<>();
+        ArrayList<Task> taskArray = new ArrayList<>();
 
         Path folderPath = Path.of("data");
         Path filePath = folderPath.resolve("tasks.md");
@@ -155,7 +155,7 @@ public class Zephyr {
                 lines.forEach(line -> {
                     Task task = parseLine(line);
                     if (task != null) {
-                        taskList.add(task);
+                        taskArray.add(task);
                     }
                 });
             } catch (IOException e) {
@@ -176,8 +176,8 @@ public class Zephyr {
                 case LIST:
                     System.out.println("____________________________________________________________");
                     System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < taskList.size(); i++) {
-                        System.out.println(i + 1 + ". " + taskList.get(i).toString());
+                    for (int i = 0; i < taskArray.size(); i++) {
+                        System.out.println(i + 1 + ". " + taskArray.get(i).toString());
                     }
                     System.out.println("____________________________________________________________");
                     break;
@@ -188,17 +188,17 @@ public class Zephyr {
                     } catch (NumberFormatException e) {
                         throw new ZephyrException("Task number must be an integer.");
                     }
-                    if (markNumber > taskList.size()) {
+                    if (markNumber > taskArray.size()) {
                         throw new ZephyrException("Task number does not exist.");
                     }
                     if (markNumber < 1) {
                         throw new ZephyrException("Task number must be greater than 0.");
                     }
                     markNumber--;
-                    taskList.get(markNumber).markAsDone();
+                    taskArray.get(markNumber).markAsDone();
                     System.out.println("____________________________________________________________");
                     System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(taskList.get(markNumber).toString());
+                    System.out.println(taskArray.get(markNumber).toString());
                     System.out.println("____________________________________________________________");
                     break;
                 case UNMARK:
@@ -208,14 +208,14 @@ public class Zephyr {
                     } catch (NumberFormatException e) {
                         throw new ZephyrException("Task number must be an integer.");
                     }
-                    if (unmarkNumber > taskList.size()) {
+                    if (unmarkNumber > taskArray.size()) {
                         throw new ZephyrException("Task number does not exist.");
                     }
                     if (unmarkNumber < 1) {
                         throw new ZephyrException("Task number must be greater than 0.");
                     }
                     unmarkNumber--;
-                    taskList.get(unmarkNumber).markAsUndone();
+                    taskArray.get(unmarkNumber).markAsUndone();
                     System.out.println("____________________________________________________________");
                     System.out.println("Nice! I've marked this task as undone:");
                     System.out.println(taskList.get(unmarkNumber).toString());
@@ -227,7 +227,7 @@ public class Zephyr {
                         throw new ZephyrException("Todo description cannot be empty.");
                     }
                     Todo task = new Todo(description);
-                    taskList.add(task);
+                    taskArray.add(task);
                     System.out.println("____________________________________________________________");
                     System.out.println("Got it. I've added this task:");
                     System.out.println(task);
@@ -244,7 +244,7 @@ public class Zephyr {
                         throw new ZephyrException("Deadline by cannot be empty.");
                     }
                     Deadline deadlineTask = new Deadline(deadlineDescription, byDate);
-                    taskList.add(deadlineTask);
+                    taskArray.add(deadlineTask);
                     System.out.println("____________________________________________________________");
                     System.out.println("Got it. I've added this task:");
                     System.out.println(deadlineTask);
@@ -266,7 +266,7 @@ public class Zephyr {
                         throw new ZephyrException("Event end time cannot be empty.");
                     }
                     Event eventTask = new Event(eventDescription, fromDate, toDate);
-                    taskList.add(eventTask);
+                    taskArray.add(eventTask);
                     System.out.println("____________________________________________________________");
                     System.out.println("Got it. I've added this task:");
                     System.out.println(eventTask);
@@ -279,7 +279,7 @@ public class Zephyr {
                     } catch (NumberFormatException e) {
                         throw new ZephyrException("Task number must be an integer.");
                     }
-                    if (deleteNumber > taskList.size()) {
+                    if (deleteNumber > taskArray.size()) {
                         throw new ZephyrException("Task number does not exist.");
                     }
                     if (deleteNumber < 1) {
@@ -287,11 +287,11 @@ public class Zephyr {
                     }
 
                     deleteNumber--;
-                    Task deletedTask = taskList.remove(deleteNumber);
+                    Task deletedTask = taskArray.remove(deleteNumber);
                     System.out.println("____________________________________________________________");
                     System.out.println("Noted. I've removed this task:");
                     System.out.println(deletedTask);
-                    System.out.println("Now thou have " + taskList.size() + " tasks in the list.");
+                    System.out.println("Now thou have " + taskArray.size() + " tasks in the list.");
                     System.out.println("____________________________________________________________");
                     break;
                 default:
@@ -318,7 +318,7 @@ public class Zephyr {
         }
 
         StringBuilder output = new StringBuilder();
-        for (Task task : taskList) {
+        for (Task task : taskArray) {
             output.append(task.toMarkdownString()).append("\n");
         }
         saveToFile("data", "tasks.md", output.toString());
