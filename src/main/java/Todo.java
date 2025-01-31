@@ -18,4 +18,13 @@ public class Todo extends Task {
         return this.toMarkdownStringInternal(this.description);
     }
 
+    /**
+     * Parse a markdown string into a Todo object
+     *
+     * @param partialString The markdown string after the '- [ ] T: ' part
+     * @return Returns Todo
+     */
+    static public Todo parseString(String partialString) {
+        return new Todo(partialString);
+    }
 }
