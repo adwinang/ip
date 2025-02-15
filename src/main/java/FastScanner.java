@@ -7,7 +7,7 @@ public class FastScanner {
     private BufferedReader reader;
     private StringTokenizer tokenizer;
 
-    public FastScanner(BufferedReader reader) {
+    public FastScanner() {
         this.reader = new BufferedReader(new InputStreamReader(System.in));
     }
 
