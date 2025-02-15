@@ -9,6 +9,7 @@ public class MarkCommand extends AbstractCommand {
         int index = Integer.parseInt(this.words[0]);
         AbstractTask task = tasks.getTask(index - 1);
         task.markAsDone();
+        ui.printTaskDone(task);
     }
 
     @Override

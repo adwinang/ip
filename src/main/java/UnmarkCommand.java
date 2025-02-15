@@ -4,22 +4,21 @@ public class UnmarkCommand extends AbstractCommand {
         super(arguments);
     }
 
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             isValidCommand();
             int index = Integer.parseInt(this.words[0]);
             AbstractTask task = tasks.getTask(index - 1);
 
-            ui.printBreak();
-            ui.println("Nice! I've unmarked this task as done:");
-            ui.println(task);
-            ui.printBreak();
+            ui.printTaskUndone(task);
 
         } catch (IndexOutOfBoundsException e) {
             throw new ZephyrException("Task number out of range.");
         }
     }
 
+    @Override
     public void isValidCommand() throws ZephyrException {
         if (this.arguments.isEmpty()) {
             throw new ZephyrException("Please enter a task number to unmark.");

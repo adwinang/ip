@@ -5,11 +5,13 @@ public class ListCommand extends AbstractCommand {
     }
 
     @Override
-    public void isValidCommand() {}
-
-    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         isValidCommand();
         ui.showAllTasks(tasks);
     }
+
+    @Override
+    public void isValidCommand() {}
+
+
 }

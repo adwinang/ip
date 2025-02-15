@@ -88,9 +88,35 @@ public class Ui {
         println("Error loading file. Creating new file.");
     }
 
-    public void printTaskAdded(Task task) {
+    public void printSavingError() {
+        println("Error saving file.");
+    }
+
+    public void printTaskAdded(AbstractTask task) {
         printBreak();
         println("Got it. I've added this task:");
+        println(task.toString());
+        printBreak();
+    }
+
+    public void printTaskDone(AbstractTask task) {
+        printBreak();
+        println("Nice! I've marked this task as done:");
+        println(task.toString());
+        printBreak();
+    }
+
+    public void printTaskDeleted(AbstractTask task, int size) {
+        printBreak();
+        println("Noted. I've removed this task:");
+        println(task.toString());
+        println("Now thou have " + size + " tasks in the list.");
+        printBreak();
+    }
+
+    public void printTaskUndone(AbstractTask task) {
+        printBreak();
+        println("Pity! I've unmarked this task as done:");
         println(task.toString());
         printBreak();
     }
