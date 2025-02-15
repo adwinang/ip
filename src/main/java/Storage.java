@@ -34,6 +34,15 @@ public class Storage {
         return lines;
     }
 
+    public void saveFile(List<Task> tasks) throws IOException {
+        createIfDirectoryNotFound();
+        FileWriter fileWriter = new FileWriter(file);
+        for (Task task : tasks) {
+            fileWriter.write(task.toMarkdownString() + "\n");
+        }
+        fileWriter.close();
+    }
+
     public void overwriteFile(String content) throws IOException {
         createIfDirectoryNotFound();
         java.io.FileWriter fileWriter = new FileWriter(file, false);
