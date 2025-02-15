@@ -1,11 +1,11 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-public class Event extends Task {
+public class EventTask extends Task {
     protected LocalDate from;
     protected LocalDate to;
 
-    public Event(String description, LocalDate from, LocalDate to) {
+    public EventTask(String description, LocalDate from, LocalDate to) {
         super(description);
         this.from = from;
         this.to = to;
@@ -17,11 +17,11 @@ public class Event extends Task {
     }
 
     public String getFrom() {
-        return Event.parseDate(this.from);
+        return EventTask.parseDate(this.from);
     }
 
     public String getTo() {
-        return Event.parseDate(this.to);
+        return EventTask.parseDate(this.to);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class Event extends Task {
      * @param partialString The markdown string to parse after the '- [ ] E: ' part
      * @return Returns Event or null if the string is not a valid Event
      */
-    public static Event parseString(String partialString) {
+    public static EventTask parseString(String partialString) {
         String[] details = partialString.split(" \\(from: ", 2);
         if (details.length < 2) {
             return null;
@@ -59,7 +59,7 @@ public class Event extends Task {
             LocalDate fromDate = LocalDate.parse(from, Task.getFormatter());
             String to = fromTo[1].substring(0, fromTo[1].length() - 1);
             LocalDate toDate = LocalDate.parse(to, Task.getFormatter());
-            return new Event(description, fromDate, toDate);
+            return new EventTask(description, fromDate, toDate);
         } catch (DateTimeParseException e) {
             return null;
         }

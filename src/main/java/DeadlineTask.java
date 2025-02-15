@@ -1,10 +1,10 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-public class Deadline extends Task {
+public class DeadlineTask extends Task {
     protected LocalDate by;
 
-    public Deadline(String description, LocalDate by) {
+    public DeadlineTask(String description, LocalDate by) {
         super(description);
         this.by = by;
     }
@@ -15,7 +15,7 @@ public class Deadline extends Task {
     }
 
     public String getBy() {
-        return Deadline.parseDate(this.by);
+        return DeadlineTask.parseDate(this.by);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class Deadline extends Task {
      * @param partialString The markdown string after the '- [ ] D: ' part
      * @return Returns Deadline or null if the string is not a valid Deadline
      */
-    public static Deadline parseString(String partialString){
+    public static DeadlineTask parseString(String partialString){
         String[] details = partialString.split(" \\(by: ", 2);
         if (details.length < 2) {
             return null;
@@ -42,7 +42,7 @@ public class Deadline extends Task {
         String by = details[1].substring(0, details[1].length() - 1);
         try {
             LocalDate byDate = LocalDate.parse(by, Task.getFormatter());
-            return new Deadline(description, byDate);
+            return new DeadlineTask(description, byDate);
         } catch (DateTimeParseException e) {
             return null;
         }

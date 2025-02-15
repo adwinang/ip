@@ -1,5 +1,5 @@
-public class Todo extends Task {
-    public Todo(String description) {
+public class TodoTask extends Task {
+    public TodoTask(String description) {
         super(description);
     }
 
@@ -24,7 +24,7 @@ public class Todo extends Task {
      * @param partialString The markdown string after the '- [ ] T: ' part
      * @return Returns Todo
      */
-    static public Todo parseString(String partialString) {
-        return new Todo(partialString);
+    static public TodoTask parseString(String partialString) {
+        return new TodoTask(partialString);
     }
 }
