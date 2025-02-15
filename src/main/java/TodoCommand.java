@@ -6,7 +6,7 @@ public class TodoCommand extends AbstractCommand {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws ZephyrException {
         isValidCommand();
-        Task newTask = new TodoTask(arguments);
+        AbstractTask newTask = new TodoTask(arguments);
         tasks.addTask(newTask);
         ui.printTaskAdded(newTask);
     }
