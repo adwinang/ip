@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-public class DeadlineTask extends Task {
+public class DeadlineTask extends AbstractTask {
     protected LocalDate by;
 
     public DeadlineTask(String description, LocalDate by) {
@@ -41,7 +41,7 @@ public class DeadlineTask extends Task {
         String description = details[0];
         String by = details[1].substring(0, details[1].length() - 1);
         try {
-            LocalDate byDate = LocalDate.parse(by, Task.getFormatter());
+            LocalDate byDate = LocalDate.parse(by, AbstractTask.getFormatter());
             return new DeadlineTask(description, byDate);
         } catch (DateTimeParseException e) {
             return null;

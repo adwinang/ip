@@ -7,7 +7,7 @@ public class MarkCommand extends AbstractCommand {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws ZephyrException {
         isValidCommand();
         int index = Integer.parseInt(this.words[0]);
-        Task task = tasks.getTask(index - 1);
+        AbstractTask task = tasks.getTask(index - 1);
         task.markAsDone();
     }
 

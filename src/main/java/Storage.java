@@ -20,8 +20,8 @@ public class Storage {
         }
     }
 
-    public List<Task> loadFile() throws IOException {
-        List<Task> lines = new ArrayList<>();
+    public List<AbstractTask> loadFile() throws IOException {
+        List<AbstractTask> lines = new ArrayList<>();
 
         if (!file.exists()) {
             return lines;
@@ -34,10 +34,10 @@ public class Storage {
         return lines;
     }
 
-    public void saveFile(List<Task> tasks) throws IOException {
+    public void saveFile(List<AbstractTask> tasks) throws IOException {
         createIfDirectoryNotFound();
         FileWriter fileWriter = new FileWriter(file);
-        for (Task task : tasks) {
+        for (AbstractTask task : tasks) {
             fileWriter.write(task.toMarkdownString() + "\n");
         }
         fileWriter.close();
@@ -62,7 +62,7 @@ public class Storage {
      * @param line The line of text to parse
      * @return Task object or null if parsing fails
      */
-    Task parseLine(String line) {
+    AbstractTask parseLine(String line) {
         // 1. Basic length check to avoid StringIndexOutOfBounds
         //    Minimum valid example is: "- [ ] X: " (8 chars before content)
         if (line == null || line.length() < 8) {
@@ -111,7 +111,7 @@ public class Storage {
 
         // 10. Create your Task-like object
         boolean isDone = (checkMark == 'X');
-        Task task;
+        AbstractTask task;
         task = switch (letter) {
             case 'T' -> TodoTask.parseString(content);
             case 'D' -> DeadlineTask.parseString(content);

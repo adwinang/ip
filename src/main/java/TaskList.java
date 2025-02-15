@@ -2,9 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    private final List<Task> tasks;
+    private final List<AbstractTask> tasks;
 
-    public TaskList(List<Task> tasks) {
+    public TaskList(List<AbstractTask> tasks) {
         this.tasks = tasks;
     }
 
@@ -12,11 +12,11 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
-    public TaskList(ArrayList<Task> tasks) {
+    public TaskList(ArrayList<AbstractTask> tasks) {
         this.tasks = tasks;
     }
 
-    public void addTask(Task task) {
+    public void addTask(AbstractTask task) {
         tasks.add(task);
     }
 
@@ -24,7 +24,7 @@ public class TaskList {
         tasks.remove(index);
     }
 
-    public Task getTask(int index) {
+    public AbstractTask getTask(int index) {
         return tasks.get(index);
     }
 
@@ -32,7 +32,7 @@ public class TaskList {
         return tasks.size();
     }
 
-    public List<Task> getTasks() {
+    public List<AbstractTask> getTasks() {
         return tasks;
     }
 

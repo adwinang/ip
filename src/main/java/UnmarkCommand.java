@@ -8,7 +8,7 @@ public class UnmarkCommand extends AbstractCommand {
         try {
             isValidCommand();
             int index = Integer.parseInt(this.words[0]);
-            Task task = tasks.getTask(index - 1);
+            AbstractTask task = tasks.getTask(index - 1);
 
             ui.printBreak();
             ui.println("Nice! I've unmarked this task as done:");

@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-public class EventTask extends Task {
+public class EventTask extends AbstractTask {
     protected LocalDate from;
     protected LocalDate to;
 
@@ -56,9 +56,9 @@ public class EventTask extends Task {
             if (!fromTo[1].endsWith(")")) {
                 return null;
             }
-            LocalDate fromDate = LocalDate.parse(from, Task.getFormatter());
+            LocalDate fromDate = LocalDate.parse(from, AbstractTask.getFormatter());
             String to = fromTo[1].substring(0, fromTo[1].length() - 1);
-            LocalDate toDate = LocalDate.parse(to, Task.getFormatter());
+            LocalDate toDate = LocalDate.parse(to, AbstractTask.getFormatter());
             return new EventTask(description, fromDate, toDate);
         } catch (DateTimeParseException e) {
             return null;

@@ -1,11 +1,11 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public abstract class Task {
+public abstract class AbstractTask {
     protected String description;
     protected boolean isDone;
 
-    public Task(String description) {
+    public AbstractTask(String description) {
         this.description = description;
         this.isDone = false;
     }
@@ -27,7 +27,7 @@ public abstract class Task {
     }
 
     static public String parseDate(LocalDate date) {
-        return date.format(Task.getFormatter());
+        return date.format(AbstractTask.getFormatter());
     }
 
     @Override

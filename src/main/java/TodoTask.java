@@ -1,4 +1,4 @@
-public class TodoTask extends Task {
+public class TodoTask extends AbstractTask {
     public TodoTask(String description) {
         super(description);
     }
