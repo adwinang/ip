@@ -1,4 +1,4 @@
-package Zephyr.Controller;
+package Zephyr.Controllers;
 
 import Zephyr.CommandTypes;
 import Zephyr.Commands.AbstractCommand;
@@ -36,15 +36,15 @@ public class Parser {
         String command = tokens[0];
         String arguments = tokens.length > 1 ? tokens[1] : "";
         return switch (CommandTypes.fromValue(command)) {
-            case CommandTypes.LIST -> new ListCommand(arguments);
-            case CommandTypes.MARK -> new MarkCommand(arguments);
-            case CommandTypes.UNMARK -> new UnmarkCommand(arguments);
-            case CommandTypes.TODO -> new TodoCommand(arguments);
-            case CommandTypes.DEADLINE -> new DeadlineCommand(arguments);
-            case CommandTypes.EVENT -> new EventCommand(arguments);
-            case CommandTypes.DELETE -> new DeleteCommand(arguments);
-            case CommandTypes.UPCOMING -> new UpcomingCommand(arguments);
-            case CommandTypes.BYE -> new ByeCommand(arguments);
+            case LIST -> new ListCommand(arguments);
+            case MARK -> new MarkCommand(arguments);
+            case UNMARK -> new UnmarkCommand(arguments);
+            case TODO -> new TodoCommand(arguments);
+            case DEADLINE -> new DeadlineCommand(arguments);
+            case EVENT -> new EventCommand(arguments);
+            case DELETE -> new DeleteCommand(arguments);
+            case UPCOMING -> new UpcomingCommand(arguments);
+            case BYE -> new ByeCommand(arguments);
             default -> new UnknownCommand(arguments);
         };
     }

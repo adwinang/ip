@@ -1,10 +1,10 @@
 package Zephyr.Commands;
 
 import Zephyr.Tasks.AbstractTask;
-import Zephyr.Controller.Storage;
-import Zephyr.TaskList;
+import Zephyr.Controllers.Storage;
+import Zephyr.DataStructures.TaskList;
 import Zephyr.Tasks.TodoTask;
-import Zephyr.Controller.Ui;
+import Zephyr.Controllers.Ui;
 import Zephyr.Exceptions.ZephyrException;
 
 public class TodoCommand extends AbstractCommand {

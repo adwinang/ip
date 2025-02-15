@@ -3,10 +3,11 @@ package Zephyr;
 import java.io.IOException;
 
 import Zephyr.Commands.AbstractCommand;
-import Zephyr.Controller.Parser;
-import Zephyr.Controller.Storage;
-import Zephyr.Controller.Ui;
+import Zephyr.Controllers.Parser;
+import Zephyr.Controllers.Storage;
+import Zephyr.Controllers.Ui;
 import Zephyr.Exceptions.ZephyrException;
+import Zephyr.DataStructures.TaskList;
 
 public class Zephyr {
 

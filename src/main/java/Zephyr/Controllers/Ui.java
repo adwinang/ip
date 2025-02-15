@@ -1,10 +1,10 @@
-package Zephyr.Controller;
+package Zephyr.Controllers;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.io.PrintStream;
 
-import Zephyr.TaskList;
+import Zephyr.DataStructures.TaskList;
 import Zephyr.Tasks.AbstractTask;
 
 public class Ui {
@@ -80,8 +80,9 @@ public class Ui {
                 4. todo <task description>
                 5. deadlineTask <task description> /by <deadlineTask>
                 6. eventTask <task description> /from <start time> /to <end time>
-                7. delete <task number>
-                8. bye - To exit the programme
+                7. upcoming <task type> <days>
+                8. delete <task number>
+                9. bye - To exit the programme
                 """);
         printBreak();
     }

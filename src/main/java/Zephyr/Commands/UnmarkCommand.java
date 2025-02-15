@@ -1,14 +1,14 @@
 package Zephyr.Commands;
 
 import Zephyr.Tasks.AbstractTask;
-import Zephyr.Controller.Storage;
-import Zephyr.TaskList;
-import Zephyr.Controller.Ui;
+import Zephyr.Controllers.Storage;
+import Zephyr.DataStructures.TaskList;
+import Zephyr.Controllers.Ui;
 import Zephyr.Exceptions.ZephyrException;
 
 public class UnmarkCommand extends AbstractCommand {
 
-    UnmarkCommand(String arguments) {
+    public UnmarkCommand(String arguments) {
         super(arguments);
     }
 

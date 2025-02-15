@@ -1,4 +1,4 @@
-package Zephyr.Controller;
+package Zephyr.Controllers;
 
 import java.io.BufferedReader;
 import java.io.File;

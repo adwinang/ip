@@ -1,4 +1,4 @@
-package Zephyr;
+package Zephyr.DataStructures;
 
 import java.util.ArrayList;
 import java.util.List;
