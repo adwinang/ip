@@ -1,5 +1,20 @@
+package Zephyr.Controller;
+
+import Zephyr.CommandTypes;
+import Zephyr.Commands.AbstractCommand;
+import Zephyr.Commands.ByeCommand;
+import Zephyr.Commands.DeadlineCommand;
+import Zephyr.Commands.DeleteCommand;
+import Zephyr.Commands.EventCommand;
+import Zephyr.Commands.ListCommand;
+import Zephyr.Commands.MarkCommand;
+import Zephyr.Commands.TodoCommand;
+import Zephyr.Commands.UnknownCommand;
+import Zephyr.Commands.UnmarkCommand;
+import Zephyr.Commands.UpcomingCommand;
+
 /**
- * Parser class is responsible for parsing the user input into commands
+ * Zephyr.Controller.Parser class is responsible for parsing the user input into commands
  */
 public class Parser {
 

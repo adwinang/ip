@@ -1,3 +1,10 @@
+package Zephyr.Commands;
+
+import Zephyr.Controller.Storage;
+import Zephyr.TaskList;
+import Zephyr.Controller.Ui;
+import Zephyr.Exceptions.ZephyrException;
+
 public class UnknownCommand extends AbstractCommand {
 
     UnknownCommand(String arguments) {

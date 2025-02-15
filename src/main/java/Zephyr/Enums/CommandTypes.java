@@ -1,3 +1,5 @@
+package Zephyr;
+
 public enum CommandTypes {
     LIST("list"),
     MARK("mark"),

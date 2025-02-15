@@ -1,4 +1,12 @@
+package Zephyr;
+
 import java.io.IOException;
+
+import Zephyr.Commands.AbstractCommand;
+import Zephyr.Controller.Parser;
+import Zephyr.Controller.Storage;
+import Zephyr.Controller.Ui;
+import Zephyr.Exceptions.ZephyrException;
 
 public class Zephyr {
 

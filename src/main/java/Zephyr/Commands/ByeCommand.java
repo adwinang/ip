@@ -1,3 +1,9 @@
+package Zephyr.Commands;
+
+import Zephyr.Controller.Storage;
+import Zephyr.TaskList;
+import Zephyr.Controller.Ui;
+
 public class ByeCommand extends AbstractCommand {
 
     ByeCommand(String arguments) {

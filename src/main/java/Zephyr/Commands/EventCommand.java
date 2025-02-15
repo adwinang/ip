@@ -1,5 +1,13 @@
+package Zephyr.Commands;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import Zephyr.Tasks.EventTask;
+import Zephyr.Controller.Storage;
+import Zephyr.TaskList;
+import Zephyr.Controller.Ui;
+import Zephyr.Exceptions.ZephyrException;
 
 public class EventCommand extends AbstractCommand {
     EventCommand(String arguments) {
