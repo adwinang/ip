@@ -18,8 +18,13 @@ public class EventTask extends AbstractTask {
         return "[E]" + super.toString() + " (from: " + this.getFrom() + " at: " + this.getTo() + ")";
     }
 
-    public String getFrom() {
-        return EventTask.parseDate(this.from);
+    @Override
+    public String getTaskType() {
+        return "event";
+    }
+
+    public LocalDate getFrom() {
+        return this.from;
     }
 
     public String getTo() {

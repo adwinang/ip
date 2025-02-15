@@ -16,8 +16,13 @@ public class DeadlineTask extends AbstractTask {
         return "[D]" + super.toString() + " (by: " + this.getBy() + ")";
     }
 
-    public String getBy() {
-        return DeadlineTask.parseDate(this.by);
+    public LocalDate getBy() {
+        return this.by;
+    }
+
+    @Override
+    public String getTaskType() {
+        return "deadline";
     }
 
     @Override

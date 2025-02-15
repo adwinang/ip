@@ -11,6 +11,11 @@ public class TodoTask extends AbstractTask {
     }
 
     @Override
+    public String getTaskType() {
+        return "todo";
+    }
+
+    @Override
     protected String toMarkdownStringInternal(String details) {
         return super.toMarkdownStringInternal("T: " + details);
     }

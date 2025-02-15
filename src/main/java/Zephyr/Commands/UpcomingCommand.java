@@ -6,14 +6,14 @@ import java.time.temporal.ChronoUnit;
 import Zephyr.Tasks.AbstractTask;
 import Zephyr.Tasks.DeadlineTask;
 import Zephyr.Tasks.EventTask;
-import Zephyr.Controller.Storage;
-import Zephyr.TaskList;
-import Zephyr.Controller.Ui;
+import Zephyr.Controllers.Storage;
+import Zephyr.DataStructures.TaskList;
+import Zephyr.Controllers.Ui;
 import Zephyr.Exceptions.ZephyrException;
 
 public class UpcomingCommand extends AbstractCommand {
 
-    UpcomingCommand(String arguments) {
+    public UpcomingCommand(String arguments) {
         super(arguments);
     }
 
@@ -21,20 +21,21 @@ public class UpcomingCommand extends AbstractCommand {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         isValidCommand();
 
+        String taskType = this.words[0];
         int days = Integer.parseInt(this.words[1]);
         LocalDate currentDate = LocalDate.now();
 
         AbstractTask[] upcomingTasks = new AbstractTask[tasks.getSize()];
         int i = 0;
         for (AbstractTask task : tasks.getTasks()) {
-            if (task instanceof DeadlineTask deadlineTask) {
-                LocalDate deadlineDate = deadlineTask.by;
+            if (taskType.equalsIgnoreCase(task.getTaskType()) && task instanceof DeadlineTask deadlineTask) {
+                LocalDate deadlineDate = deadlineTask.getBy();
                 if (deadlineDate.isAfter(currentDate) && deadlineDate.isBefore(currentDate.plusDays(days))) {
                     upcomingTasks[i] = task;
                     i++;
                 }
-            } else if (task instanceof EventTask eventTask) {
-                LocalDate eventDate = eventTask.from;
+            } else if (taskType.equalsIgnoreCase(task.getTaskType()) && task instanceof EventTask eventTask) {
+                LocalDate eventDate = eventTask.getFrom();
                 if (eventDate.isAfter(currentDate) && eventDate.isBefore(currentDate.plusDays(days))) {
                     upcomingTasks[i] = task;
                     i++;
@@ -54,13 +55,13 @@ public class UpcomingCommand extends AbstractCommand {
 
         for (int j = 0; j < i; j++) {
             AbstractTask task = upcomingTasks[j];
-            if (taskType.equalsIgnoreCase("deadline") && task instanceof DeadlineTask deadlineTask) {
-                long daysUntilDeadline = ChronoUnit.DAYS.between(currentDate, deadlineTask.by);
+            if (taskType.equalsIgnoreCase(task.getTaskType()) && task instanceof DeadlineTask deadlineTask) {
+                long daysUntilDeadline = ChronoUnit.DAYS.between(currentDate, deadlineTask.getBy());
 
                 ui.println((j + 1) + ". " + deadlineTask);
                 ui.println("    " + daysUntilDeadline + " days until deadline.");
-            } else if (taskType.equalsIgnoreCase("event") && task instanceof EventTask eventTask) {
-                long daysUntilEvent = ChronoUnit.DAYS.between(currentDate, eventTask.from);
+            } else if (taskType.equalsIgnoreCase(task.getTaskType()) && task instanceof EventTask eventTask) {
+                long daysUntilEvent = ChronoUnit.DAYS.between(currentDate, eventTask.getFrom());
 
                 ui.println((j + 1) + ". " + eventTask);
                 ui.println("    " + daysUntilEvent + " days until event.");
