@@ -2,10 +2,10 @@ import java.io.IOException;
 
 public class Zephyr {
 
-    private Ui ui;
+    private final Ui ui;
     private TaskList tasks;
-    private Storage storage;
-    private Parser parser;
+    private final Storage storage;
+    private final Parser parser;
 
 
     public Zephyr(String filePath) {
