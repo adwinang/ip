@@ -1,4 +1,7 @@
 public abstract class AbstractCommand {
+    /**
+     * Arguments of the command, excludes the command itself
+     */
     String arguments;
     String[] words;
 
@@ -14,10 +17,9 @@ public abstract class AbstractCommand {
     }
 
     /**
-     * Checks if line is a valid command
-     * Line excludes the actual command
+     * Checks if remaining arguments are valid
+     * It is not context aware, meaning it does not check if the arguments are valid for TaskList, Ui or Storage
      * Throws a ZephyrException if the command is invalid
-     *
      */
     public abstract void isValidCommand() throws ZephyrException;
 
