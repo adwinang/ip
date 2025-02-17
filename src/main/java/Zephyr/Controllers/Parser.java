@@ -1,6 +1,6 @@
 package Zephyr.Controllers;
 
-import Zephyr.CommandTypes;
+import Zephyr.Enums.CommandTypes;
 import Zephyr.Commands.AbstractCommand;
 import Zephyr.Commands.ByeCommand;
 import Zephyr.Commands.DeadlineCommand;
