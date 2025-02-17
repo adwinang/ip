@@ -3,6 +3,7 @@ package Zephyr.Controllers;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.io.PrintStream;
+import java.util.List;
 
 import Zephyr.DataStructures.TaskList;
 import Zephyr.Tasks.AbstractTask;
@@ -40,6 +41,8 @@ public class Ui {
      * @param message the object whose string representation is printed
      */
     public void println(Object message) {
+        // String.valueOf() is used to handle null parameters
+        // https://stackoverflow.com/questions/27465731/string-valueof-vs-object-tostring
         String strMessage = String.valueOf(message);
         println(strMessage);
     }
@@ -176,6 +179,15 @@ public class Ui {
      */
     public String readCommand() {
         return scanner.nextLine();
+    }
+
+    public void printTaskList(List<AbstractTask> tasks) {
+        printBreak();
+        println("Here are thine search results:");
+        for (int i = 0; i < tasks.size(); i++) {
+            println(i + 1 + ". " + tasks.get(i) + "\n");
+        }
+        printBreak();
     }
 
     /**

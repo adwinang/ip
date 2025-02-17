@@ -12,6 +12,7 @@ import Zephyr.Commands.TodoCommand;
 import Zephyr.Commands.UnknownCommand;
 import Zephyr.Commands.UnmarkCommand;
 import Zephyr.Commands.UpcomingCommand;
+import Zephyr.Commands.FindCommand;
 
 /**
  * A parser that converts user input into corresponding command objects.
@@ -51,6 +52,7 @@ public class Parser {
             case EVENT -> new EventCommand(arguments);
             case DELETE -> new DeleteCommand(arguments);
             case UPCOMING -> new UpcomingCommand(arguments);
+            case FIND -> new FindCommand(arguments);
             case BYE -> new ByeCommand(arguments);
             default -> new UnknownCommand(arguments);
         };
