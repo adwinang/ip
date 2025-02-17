@@ -9,6 +9,7 @@ public enum CommandTypes {
     EVENT("event"),
     DELETE("delete"),
     UPCOMING("upcoming"),
+    FIND("find"),
     BYE("bye"),
     UNKNOWN("unknown");
 
