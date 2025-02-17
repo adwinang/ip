@@ -1,4 +1,4 @@
-package Zephyr;
+package Zephyr.Enums;
 
 public enum CommandTypes {
     LIST("list"),
