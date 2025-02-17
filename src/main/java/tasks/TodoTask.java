@@ -1,4 +1,4 @@
-package zephyr.Tasks;
+package tasks;
 
 /**
  * Represents a todo task.

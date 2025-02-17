@@ -1,4 +1,4 @@
-package zephyr.Exceptions;
+package exceptions;
 
 /**
  * A custom runtime exception for handling errors in the Zephyr application.

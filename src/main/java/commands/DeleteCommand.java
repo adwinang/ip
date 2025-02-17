@@ -1,9 +1,9 @@
-package zephyr.Commands;
+package commands;
 
-import zephyr.Controllers.Storage;
-import zephyr.DataStructures.TaskList;
-import zephyr.Controllers.Ui;
-import zephyr.Exceptions.ZephyrException;
+import controllers.Storage;
+import datastructures.TaskList;
+import controllers.Ui;
+import exceptions.ZephyrException;
 
 /**
  * Represents a command to delete a task from the task list.

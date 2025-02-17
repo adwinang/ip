@@ -1,11 +1,11 @@
-package zephyr.Commands;
+package commands;
 
-import zephyr.Tasks.AbstractTask;
-import zephyr.Controllers.Storage;
-import zephyr.DataStructures.TaskList;
-import zephyr.Tasks.TodoTask;
-import zephyr.Controllers.Ui;
-import zephyr.Exceptions.ZephyrException;
+import tasks.AbstractTask;
+import controllers.Storage;
+import datastructures.TaskList;
+import tasks.TodoTask;
+import controllers.Ui;
+import exceptions.ZephyrException;
 
 /**
  * Represents a command to add a TodoTask to the task list.

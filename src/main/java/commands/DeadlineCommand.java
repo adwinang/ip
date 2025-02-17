@@ -1,13 +1,13 @@
-package zephyr.Commands;
+package commands;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import zephyr.Tasks.DeadlineTask;
-import zephyr.Controllers.Storage;
-import zephyr.DataStructures.TaskList;
-import zephyr.Controllers.Ui;
-import zephyr.Exceptions.ZephyrException;
+import tasks.DeadlineTask;
+import controllers.Storage;
+import datastructures.TaskList;
+import controllers.Ui;
+import exceptions.ZephyrException;
 
 /**
  * Represents a command to add a DeadlineTask to the task list.

@@ -1,4 +1,4 @@
-package zephyr.Controllers;
+package controllers;
 
 import java.io.BufferedReader;
 import java.io.IOException;

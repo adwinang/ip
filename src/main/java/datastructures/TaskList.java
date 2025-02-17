@@ -1,8 +1,8 @@
-package zephyr.DataStructures;
+package datastructures;
 
 import java.util.ArrayList;
 import java.util.List;
-import zephyr.Tasks.AbstractTask;
+import tasks.AbstractTask;
 
 /**
  * Represents a list of tasks.

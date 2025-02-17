@@ -1,11 +1,11 @@
-package zephyr.Commands;
+package commands;
 
 import java.util.List;
-import zephyr.Controllers.Storage;
-import zephyr.Controllers.Ui;
-import zephyr.DataStructures.TaskList;
-import zephyr.Exceptions.ZephyrException;
-import zephyr.Tasks.AbstractTask;
+import controllers.Storage;
+import controllers.Ui;
+import datastructures.TaskList;
+import exceptions.ZephyrException;
+import tasks.AbstractTask;
 
 /**
  * Represents a command to search for tasks based on a provided query.

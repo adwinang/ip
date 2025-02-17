@@ -1,13 +1,11 @@
-package zephyr;
-
 import java.io.IOException;
 
-import zephyr.Commands.AbstractCommand;
-import zephyr.Controllers.Parser;
-import zephyr.Controllers.Storage;
-import zephyr.Controllers.Ui;
-import zephyr.DataStructures.TaskList;
-import zephyr.Exceptions.ZephyrException;
+import commands.AbstractCommand;
+import controllers.Parser;
+import controllers.Storage;
+import controllers.Ui;
+import datastructures.TaskList;
+import exceptions.ZephyrException;
 
 /**
  * The main class for the Zephyr application.

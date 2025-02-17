@@ -1,15 +1,15 @@
-package zephyr.Commands;
+package commands;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-import zephyr.Tasks.AbstractTask;
-import zephyr.Tasks.DeadlineTask;
-import zephyr.Tasks.EventTask;
-import zephyr.Controllers.Storage;
-import zephyr.DataStructures.TaskList;
-import zephyr.Controllers.Ui;
-import zephyr.Exceptions.ZephyrException;
+import tasks.AbstractTask;
+import tasks.DeadlineTask;
+import tasks.EventTask;
+import controllers.Storage;
+import datastructures.TaskList;
+import controllers.Ui;
+import exceptions.ZephyrException;
 
 /**
  * Represents a command to display upcoming tasks within a specified number of days.

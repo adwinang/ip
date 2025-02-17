@@ -1,9 +1,9 @@
-package zephyr.Commands;
+package commands;
 
-import zephyr.Controllers.Storage;
-import zephyr.DataStructures.TaskList;
-import zephyr.Controllers.Ui;
-import zephyr.Exceptions.ZephyrException;
+import controllers.Storage;
+import controllers.Ui;
+import datastructures.TaskList;
+import exceptions.ZephyrException;
 
 /**
  * Abstract class for all commands

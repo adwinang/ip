@@ -1,18 +1,18 @@
-package zephyr.Controllers;
+package controllers;
 
-import zephyr.Enums.CommandTypes;
-import zephyr.Commands.AbstractCommand;
-import zephyr.Commands.ByeCommand;
-import zephyr.Commands.DeadlineCommand;
-import zephyr.Commands.DeleteCommand;
-import zephyr.Commands.EventCommand;
-import zephyr.Commands.ListCommand;
-import zephyr.Commands.MarkCommand;
-import zephyr.Commands.TodoCommand;
-import zephyr.Commands.UnknownCommand;
-import zephyr.Commands.UnmarkCommand;
-import zephyr.Commands.UpcomingCommand;
-import zephyr.Commands.FindCommand;
+import enums.CommandTypes;
+import commands.AbstractCommand;
+import commands.ByeCommand;
+import commands.DeadlineCommand;
+import commands.DeleteCommand;
+import commands.EventCommand;
+import commands.ListCommand;
+import commands.MarkCommand;
+import commands.TodoCommand;
+import commands.UnknownCommand;
+import commands.UnmarkCommand;
+import commands.UpcomingCommand;
+import commands.FindCommand;
 
 /**
  * A parser that converts user input into corresponding command objects.

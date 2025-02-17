@@ -1,4 +1,4 @@
-package zephyr.Enums;
+package enums;
 
 /**
  * Represents the available command types for the application.

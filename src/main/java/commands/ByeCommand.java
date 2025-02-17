@@ -1,8 +1,8 @@
-package zephyr.Commands;
+package commands;
 
-import zephyr.Controllers.Storage;
-import zephyr.DataStructures.TaskList;
-import zephyr.Controllers.Ui;
+import controllers.Storage;
+import datastructures.TaskList;
+import controllers.Ui;
 
 /**
  * Represents the command to terminate the application.
