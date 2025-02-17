@@ -14,22 +14,29 @@ import Zephyr.Commands.UnmarkCommand;
 import Zephyr.Commands.UpcomingCommand;
 
 /**
- * Zephyr.Controller.Parser class is responsible for parsing the user input into commands
+ * A parser that converts user input into corresponding command objects.
  */
 public class Parser {
 
     private final Ui ui;
     private final Storage storage;
 
+    /**
+     * Constructs a new Parser with the given storage and user interface.
+     *
+     * @param storage the Storage object used for file operations
+     * @param ui      the Ui object used for user interaction
+     */
     public Parser(Storage storage, Ui ui) {
         this.ui = ui;
         this.storage = storage;
     }
 
     /**
-     * Parses the user input into a command
-     * @param input User input
-     * @return Command object
+     * Parses the given user input string into an appropriate command.
+     *
+     * @param input the user input
+     * @return an AbstractCommand corresponding to the input
      */
     public AbstractCommand parse(String input) {
         String[] tokens = input.split(" ", 2);
@@ -48,5 +55,4 @@ public class Parser {
             default -> new UnknownCommand(arguments);
         };
     }
-
 }

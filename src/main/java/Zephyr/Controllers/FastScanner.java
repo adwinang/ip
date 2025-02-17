@@ -5,17 +5,25 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
+/**
+ * A fast input reader that uses BufferedReader and StringTokenizer
+ * to efficiently read tokens, lines, and primitive data types from the standard input.
+ */
 public class FastScanner {
     private BufferedReader reader;
     private StringTokenizer tokenizer;
 
+    /**
+     * Constructs a new FastScanner that reads from standard input.
+     */
     public FastScanner() {
         this.reader = new BufferedReader(new InputStreamReader(System.in));
     }
 
     /**
-     * Gets the next string from the user input
-     * @return String input from the user
+     * Returns the next token from the input.
+     *
+     * @return the next token as a String
      */
     String nextString() {
         while (tokenizer == null || !tokenizer.hasMoreElements()) {
@@ -29,8 +37,9 @@ public class FastScanner {
     }
 
     /**
-     * Gets the next line from the user input
-     * @return String input from the user
+     * Returns the next line of input.
+     *
+     * @return the next line as a String, or an empty string if an error occurs
      */
     String nextLine() {
         try {
@@ -38,14 +47,14 @@ public class FastScanner {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return "";
     }
 
     /**
-     * Read until the delimiter is found or until end of line
-     * @param delimiter Defines the string to detect to stop reading
-     * @return The string read until the delimiter
+     * Reads tokens until a token ending with the specified delimiter is found.
+     *
+     * @param delimiter the delimiter string that indicates when to stop reading
+     * @return the concatenated tokens read until the delimiter, or an empty string if no tokens are available
      */
     String nextUntil(String delimiter) {
         if (tokenizer == null || !tokenizer.hasMoreElements()) {
@@ -56,7 +65,6 @@ public class FastScanner {
         while (tokenizer.hasMoreElements()) {
             String token = tokenizer.nextToken();
             if (token.endsWith(delimiter)) {
-                // Remove the delimiter from the token and append to sb
                 sb.append(token, 0, token.length() - delimiter.length());
                 delimiterFound = true;
                 break;
@@ -67,9 +75,9 @@ public class FastScanner {
     }
 
     /**
-     * Get the remaining line of the input
-     * This is like a cursor if nextString/nextInt/nextLong is used
-     * @return The remaining line of the input
+     * Returns the remaining tokens on the current line.
+     *
+     * @return a String containing the remaining tokens, or an empty string if none remain
      */
     String remainingLine() {
         if (tokenizer == null || !tokenizer.hasMoreElements()) {
@@ -83,25 +91,28 @@ public class FastScanner {
     }
 
     /**
-     * Get the next integer from the user input
-     * @return Integer input from the user
+     * Returns the next integer from the input.
+     *
+     * @return the next integer value
      */
     int nextInt() {
         return Integer.parseInt(nextString());
     }
 
     /**
-     * Get the next long from the user input
-     * @return Long input from the user
+     * Returns the next long integer from the input.
+     *
+     * @return the next long value
      */
     long nextLong() {
         return Long.parseLong(nextString());
     }
 
     /**
-     * Get the next double from the user input
-     * @param n Array size
-     * @return Array of integers
+     * Reads an array of integers from the input.
+     *
+     * @param n the number of integers to read
+     * @return an array of n integers
      */
     int[] readArray(int n) {
         int[] a = new int[n];
@@ -112,7 +123,7 @@ public class FastScanner {
     }
 
     /**
-     * Close the reader when ending the program gracefully
+     * Closes the input reader.
      */
     void close() {
         try {

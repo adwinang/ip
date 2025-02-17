@@ -7,97 +7,113 @@ import java.io.PrintStream;
 import Zephyr.DataStructures.TaskList;
 import Zephyr.Tasks.AbstractTask;
 
+/**
+ * Handles user interaction by printing messages, reading user input,
+ * and formatting dates for display.
+ */
 public class Ui {
     private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
     private final FastScanner scanner;
     private final PrintStream output;
     private final String LINE_BREAK = "____________________________________________________________";
 
+    /**
+     * Constructs a new Ui object using standard input and output.
+     */
     public Ui() {
         this.scanner = new FastScanner();
         this.output = System.out;
     }
 
     /**
-     * Print the message to the user
-     * Function is refactored to abstract the output stream
-     * @param message The String message to be printed
+     * Prints a message to the user.
+     *
+     * @param message the message to print
      */
     public void println(String message) {
         this.output.println(message);
     }
 
     /**
-     * Overloaded method to print the message to the user
-     * @param message The Object message to be printed
+     * Prints an object's string representation to the user.
+     *
+     * @param message the object whose string representation is printed
      */
     public void println(Object message) {
-        // String.valueOf() is used to handle null parameters
-        // https://stackoverflow.com/questions/27465731/string-valueof-vs-object-tostring
         String strMessage = String.valueOf(message);
         println(strMessage);
     }
 
+    /**
+     * Starts the user interface by printing the welcome message.
+     */
     public void start() {
         printWelcome();
     }
 
     /**
-     * Print the welcome message when the program starts
+     * Prints the welcome message when the program starts.
      */
     public void printWelcome() {
         printBreak();
-        println("""
-                 Hello! I'm Zephyr
-                 What can I do for thou?
-                """);
+        println("Hello! I'm Zephyr\nWhat can I do for thou?");
         printBreak();
     }
 
     /**
-     * Print the goodbye message when the program ends
+     * Prints the goodbye message when the program ends.
      */
     public void printGoodbye() {
         printBreak();
-        println("""
-                 Goodbye! May thou have a safe journey ahead.
-                """);
+        println("Goodbye! May thou have a safe journey ahead.");
         printBreak();
     }
 
+    /**
+     * Prints a line break.
+     */
     public void printBreak() {
         println(LINE_BREAK);
     }
 
+    /**
+     * Prints a message indicating that the command is unknown.
+     */
     public void printUnknown() {
         printBreak();
-        println("""
-                I do not understand what thou art saying.
-                Please enter a valid command using the follow:
-                1. list
-                2. mark <task number>
-                3. unmark <task number>
-                4. todo <task description>
-                5. deadlineTask <task description> /by <deadlineTask>
-                6. eventTask <task description> /from <start time> /to <end time>
-                7. upcoming <task type> <days>
-                8. delete <task number>
-                9. bye - To exit the programme
-                """);
+        println("I do not understand what thou art saying.\n" +
+                "Please enter a valid command using the follow:\n" +
+                "1. list\n" +
+                "2. mark <task number>\n" +
+                "3. unmark <task number>\n" +
+                "4. todo <task description>\n" +
+                "5. deadlineTask <task description> /by <deadlineTask>\n" +
+                "6. eventTask <task description> /from <start time> /to <end time>\n" +
+                "7. upcoming <task type> <days>\n" +
+                "8. delete <task number>\n" +
+                "9. bye - To exit the programme");
         printBreak();
     }
 
     /**
-     * Print the error message when an error occurs
+     * Prints an error message indicating a problem occurred while loading a file.
      */
     public void printLoadingError() {
         println("Error loading file. Creating new file.");
     }
 
+    /**
+     * Prints an error message indicating a problem occurred while saving a file.
+     */
     public void printSavingError() {
         println("Error saving file.");
     }
 
+    /**
+     * Prints a message indicating that a task has been added.
+     *
+     * @param task the task that was added
+     */
     public void printTaskAdded(AbstractTask task) {
         printBreak();
         println("Got it. I've added this task:");
@@ -105,6 +121,11 @@ public class Ui {
         printBreak();
     }
 
+    /**
+     * Prints a message indicating that a task has been marked as done.
+     *
+     * @param task the task that was marked as done
+     */
     public void printTaskDone(AbstractTask task) {
         printBreak();
         println("Nice! I've marked this task as done:");
@@ -112,6 +133,12 @@ public class Ui {
         printBreak();
     }
 
+    /**
+     * Prints a message indicating that a task has been deleted.
+     *
+     * @param task the task that was deleted
+     * @param size the number of tasks remaining in the list
+     */
     public void printTaskDeleted(AbstractTask task, int size) {
         printBreak();
         println("Noted. I've removed this task:");
@@ -120,6 +147,11 @@ public class Ui {
         printBreak();
     }
 
+    /**
+     * Prints a message indicating that a task has been unmarked.
+     *
+     * @param task the task that was unmarked
+     */
     public void printTaskUndone(AbstractTask task) {
         printBreak();
         println("Pity! I've unmarked this task as done:");
@@ -127,14 +159,30 @@ public class Ui {
         printBreak();
     }
 
+    /**
+     * Parses a date string into a LocalDate using the defined date format.
+     *
+     * @param date the date string to parse
+     * @return the LocalDate corresponding to the date string
+     */
     public LocalDate parseDate(String date) {
         return LocalDate.parse(date, FORMATTER);
     }
 
+    /**
+     * Reads a command from the user input.
+     *
+     * @return the command entered by the user
+     */
     public String readCommand() {
         return scanner.nextLine();
     }
 
+    /**
+     * Displays all tasks in the provided TaskList.
+     *
+     * @param tasks the TaskList containing the tasks to display
+     */
     public void showAllTasks(TaskList tasks) {
         if (tasks.getSize() == 0) {
             printBreak();
