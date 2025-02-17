@@ -1,12 +1,12 @@
-package zephyr.Controllers;
+package controllers;
 
 import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import zephyr.DataStructures.TaskList;
-import zephyr.Tasks.AbstractTask;
+import datastructures.TaskList;
+import tasks.AbstractTask;
 
 /**
  * Handles user interaction by printing messages, reading user input,

@@ -12,8 +12,8 @@ public abstract class AbstractCommand {
     /**
      * Arguments of the command, excludes the command itself
      */
-    String arguments;
-    String[] words;
+    private String arguments;
+    private String[] words;
 
     /**
      * Constructor for AbstractCommand
@@ -51,5 +51,13 @@ public abstract class AbstractCommand {
      * @throws ZephyrException if the command is invalid
      */
     public abstract void isValidCommand() throws ZephyrException;
+
+    public String getArguments() {
+        return arguments;
+    }
+
+    public String[] getWords() {
+        return words;
+    }
 
 }

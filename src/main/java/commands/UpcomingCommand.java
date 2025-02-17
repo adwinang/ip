@@ -44,8 +44,8 @@ public class UpcomingCommand extends AbstractCommand {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         isValidCommand();
-        String taskType = this.words[0];
-        int days = Integer.parseInt(this.words[1]);
+        String taskType = this.getWords()[0];
+        int days = Integer.parseInt(this.getWords()[1]);
         LocalDate currentDate = LocalDate.now();
 
         AbstractTask[] upcomingTasks = new AbstractTask[tasks.getSize()];
@@ -101,15 +101,15 @@ public class UpcomingCommand extends AbstractCommand {
      */
     @Override
     public void isValidCommand() throws ZephyrException {
-        if (this.words.length != 2) {
+        if (this.getWords().length != 2) {
             throw new ZephyrException("There should be only 2 arguments for the upcoming command.");
         }
-        String taskType = this.words[0];
+        String taskType = this.getWords()[0];
         if (!taskType.equals("deadline") && !taskType.equals("event")) {
             throw new ZephyrException("Please enter a valid task type (deadline or event).");
         }
         try {
-            Integer.parseInt(this.words[1]);
+            Integer.parseInt(this.getWords()[1]);
         } catch (NumberFormatException e) {
             throw new ZephyrException("Thou must input a valid number of days.");
         }

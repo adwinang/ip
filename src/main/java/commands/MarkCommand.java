@@ -35,7 +35,7 @@ public class MarkCommand extends AbstractCommand {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws ZephyrException {
         isValidCommand();
-        int index = Integer.parseInt(this.words[0]);
+        int index = Integer.parseInt(this.getWords()[0]);
         AbstractTask task = tasks.getTask(index - 1);
         task.markAsDone();
         ui.printTaskDone(task);
@@ -51,14 +51,14 @@ public class MarkCommand extends AbstractCommand {
      */
     @Override
     public void isValidCommand() throws ZephyrException {
-        if (this.arguments.isEmpty()) {
+        if (this.getArguments().isEmpty()) {
             throw new ZephyrException("Please enter a task number to mark as done.");
         }
-        if (this.words.length != 1) {
+        if (this.getWords().length != 1) {
             throw new ZephyrException("There are more arguments than expected.");
         }
         try {
-            Integer.parseInt(this.words[0]);
+            Integer.parseInt(this.getWords()[0]);
         } catch (NumberFormatException e) {
             throw new ZephyrException("Please enter a valid task number to mark as done.");
         }
