@@ -5,12 +5,35 @@ import Zephyr.DataStructures.TaskList;
 import Zephyr.Controllers.Ui;
 import Zephyr.Exceptions.ZephyrException;
 
+/**
+ * Represents a command to delete a task from the task list.
+ * The {@code DeleteCommand} removes a task based on its index
+ * in the task list. The command expects a valid task number as input.
+ * If the input is invalid or out of range, an exception is thrown.
+ */
 public class DeleteCommand extends AbstractCommand {
 
+    /**
+     * Constructs a {@code DeleteCommand} instance.
+     * The command requires an integer argument representing the task index (1-based).
+     *
+     * @param arguments The task number to delete.
+     */
     public DeleteCommand(String arguments) {
         super(arguments);
     }
 
+    /**
+     * Executes the delete command by removing a task from the task list.
+     * This method validates the input, parses the task number, and removes
+     * the corresponding task. If the task number is invalid or out of range,
+     * an exception is thrown.
+     *
+     * @param tasks   The {@link TaskList} from which the task will be deleted.
+     * @param ui      The {@link Ui} object responsible for user interaction.
+     * @param storage The {@link Storage} object (not used in this command).
+     * @throws ZephyrException if the task number is invalid or out of range.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         isValidCommand();
@@ -22,6 +45,13 @@ public class DeleteCommand extends AbstractCommand {
         ui.printTaskDeleted(tasks.getTask(taskIndex), tasks.getSize());
     }
 
+    /**
+     * Validates the {@code DeleteCommand} arguments.
+     * This method ensures that the command contains a valid task number.
+     * It checks whether the input is empty or contains non-numeric characters.
+     *
+     * @throws ZephyrException if the input is empty or not a valid integer.
+     */
     @Override
     public void isValidCommand() {
         if (this.arguments.isEmpty()) {
