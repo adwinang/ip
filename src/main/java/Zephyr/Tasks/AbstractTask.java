@@ -34,6 +34,10 @@ public abstract class AbstractTask {
         return date.format(AbstractTask.getFormatter());
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
