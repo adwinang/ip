@@ -3,13 +3,13 @@ package commands;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+import controllers.Storage;
+import controllers.Ui;
+import datastructures.TaskList;
+import exceptions.ZephyrException;
 import tasks.AbstractTask;
 import tasks.DeadlineTask;
 import tasks.EventTask;
-import controllers.Storage;
-import datastructures.TaskList;
-import controllers.Ui;
-import exceptions.ZephyrException;
 
 /**
  * Represents a command to display upcoming tasks within a specified number of days.
@@ -96,8 +96,7 @@ public class UpcomingCommand extends AbstractCommand {
      * a valid task type ("deadline" or "event"), and that the second argument is a valid integer
      * representing the number of days.
      *
-     * @throws ZephyrException if the number of arguments is not equal to two, if the task type is invalid,
-     * or if the number of days is not a valid integer
+     * @throws ZephyrException if there more or less than two words and if the first word is not a task type
      */
     @Override
     public void isValidCommand() throws ZephyrException {

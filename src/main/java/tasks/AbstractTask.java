@@ -58,7 +58,7 @@ public abstract class AbstractTask {
      *
      * @return the DateTimeFormatter with the pattern "MMMM dd yyyy"
      */
-    static public DateTimeFormatter getFormatter() {
+    public static DateTimeFormatter getFormatter() {
         return DateTimeFormatter.ofPattern("MMMM dd yyyy");
     }
 
@@ -68,7 +68,7 @@ public abstract class AbstractTask {
      * @param date the LocalDate to format
      * @return a String representing the formatted date
      */
-    static public String parseDate(LocalDate date) {
+    public static String parseDate(LocalDate date) {
         return date.format(AbstractTask.getFormatter());
     }
 

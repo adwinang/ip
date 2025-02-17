@@ -80,7 +80,8 @@ public class EventTask extends AbstractTask {
      */
     @Override
     public String toMarkdownString() {
-        return this.toMarkdownStringInternal(this.description + " (from: " + this.getFrom() + " at: " + this.getTo() + ")");
+        return this.toMarkdownStringInternal(this.description
+                + " (from: " + this.getFrom() + " at: " + this.getTo() + ")");
     }
 
     /**

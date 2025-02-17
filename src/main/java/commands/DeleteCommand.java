@@ -1,8 +1,8 @@
 package commands;
 
 import controllers.Storage;
-import datastructures.TaskList;
 import controllers.Ui;
+import datastructures.TaskList;
 import exceptions.ZephyrException;
 
 /**
@@ -37,7 +37,7 @@ public class DeleteCommand extends AbstractCommand {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         isValidCommand();
-        int taskIndex = Integer.parseInt(this.arguments) - 1;
+        int taskIndex = Integer.parseInt(this.getArguments()) - 1;
         if (taskIndex < 0 || taskIndex >= tasks.getSize()) {
             throw new ZephyrException("Task number out of range.");
         }
@@ -54,12 +54,12 @@ public class DeleteCommand extends AbstractCommand {
      */
     @Override
     public void isValidCommand() {
-        if (this.arguments.isEmpty()) {
+        if (this.getArguments().isEmpty()) {
             throw new ZephyrException("The description of a delete command cannot be empty.");
         }
 
         try {
-            Integer.parseInt(this.arguments);
+            Integer.parseInt(this.getArguments());
         } catch (NumberFormatException e) {
             throw new ZephyrException("Please enter a valid task number to delete.");
         }

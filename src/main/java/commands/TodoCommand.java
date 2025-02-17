@@ -1,11 +1,11 @@
 package commands;
 
-import tasks.AbstractTask;
 import controllers.Storage;
-import datastructures.TaskList;
-import tasks.TodoTask;
 import controllers.Ui;
+import datastructures.TaskList;
 import exceptions.ZephyrException;
+import tasks.AbstractTask;
+import tasks.TodoTask;
 
 /**
  * Represents a command to add a TodoTask to the task list.
@@ -36,7 +36,7 @@ public class TodoCommand extends AbstractCommand {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws ZephyrException {
         isValidCommand();
-        AbstractTask newTask = new TodoTask(arguments);
+        AbstractTask newTask = new TodoTask(this.getArguments());
         tasks.addTask(newTask);
         ui.printTaskAdded(newTask);
     }
@@ -49,7 +49,7 @@ public class TodoCommand extends AbstractCommand {
      */
     @Override
     public void isValidCommand() {
-        if (arguments.isEmpty()) {
+        if (this.getArguments().isEmpty()) {
             throw new ZephyrException("The description of a todo cannot be empty.");
         }
     }

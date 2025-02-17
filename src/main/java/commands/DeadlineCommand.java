@@ -3,11 +3,11 @@ package commands;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import tasks.DeadlineTask;
 import controllers.Storage;
-import datastructures.TaskList;
 import controllers.Ui;
+import datastructures.TaskList;
 import exceptions.ZephyrException;
+import tasks.DeadlineTask;
 
 /**
  * Represents a command to add a DeadlineTask to the task list.
@@ -19,8 +19,8 @@ public class DeadlineCommand extends AbstractCommand {
 
     /**
      * Constructs a DeadlineCommand instance.
-     * The command expects arguments in the format:
-     * <task description> /by <deadline date>.
+     * The command expects arguments in the format
+     * <task description> /by <deadline date>
      *
      * @param arguments The raw arguments passed with the command.
      */
@@ -42,7 +42,7 @@ public class DeadlineCommand extends AbstractCommand {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         isValidCommand();
-        String[] tokens = this.arguments.split(" /by ", 2);
+        String[] tokens = this.getArguments().split(" /by ", 2);
         String description = tokens[0];
         String by = tokens[1];
 
@@ -66,14 +66,14 @@ public class DeadlineCommand extends AbstractCommand {
      */
     @Override
     public void isValidCommand() {
-        if (this.arguments.isBlank()) {
+        if (this.getArguments().isBlank()) {
             throw new ZephyrException("The description of a deadline cannot be empty.");
         }
-        if (!this.arguments.contains("/by")) {
+        if (!this.getArguments().contains("/by")) {
             throw new ZephyrException("The deadline command must contain a '/by' keyword.");
         }
 
-        String[] tokens = this.arguments.split(" /by ", 2);
+        String[] tokens = this.getArguments().split(" /by ", 2);
         if (tokens.length < 2) {
             throw new ZephyrException("The deadline command must contain a deadline.");
         }

@@ -2,6 +2,7 @@ package datastructures;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import tasks.AbstractTask;
 
 /**

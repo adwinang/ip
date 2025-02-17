@@ -61,7 +61,7 @@ public class TodoTask extends AbstractTask {
      * @param partialString the markdown string after the "- [ ] T: " part
      * @return a TodoTask object created from the given markdown string
      */
-    static public TodoTask parseString(String partialString) {
+    public static TodoTask parseString(String partialString) {
         return new TodoTask(partialString);
     }
 }

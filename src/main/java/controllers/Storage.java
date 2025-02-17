@@ -137,10 +137,10 @@ public class Storage {
         boolean isDone = (checkMark == 'X');
         AbstractTask task;
         task = switch (letter) {
-            case 'T' -> TodoTask.parseString(content);
-            case 'D' -> DeadlineTask.parseString(content);
-            case 'E' -> EventTask.parseString(content);
-            default -> null;
+        case 'T' -> TodoTask.parseString(content);
+        case 'D' -> DeadlineTask.parseString(content);
+        case 'E' -> EventTask.parseString(content);
+        default -> null;
         };
         if (task != null && isDone) {
             task.markAsDone();

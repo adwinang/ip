@@ -1,6 +1,7 @@
 package commands;
 
 import java.util.List;
+
 import controllers.Storage;
 import controllers.Ui;
 import datastructures.TaskList;
@@ -35,7 +36,7 @@ public class FindCommand extends AbstractCommand {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws ZephyrException {
-        List<AbstractTask> foundTasks = tasks.findTasks(arguments);
+        List<AbstractTask> foundTasks = tasks.findTasks(this.getArguments());
         ui.printTaskList(foundTasks);
     }
 
@@ -47,7 +48,7 @@ public class FindCommand extends AbstractCommand {
      */
     @Override
     public void isValidCommand() throws ZephyrException {
-        if (arguments.isEmpty()) {
+        if (this.getArguments().isEmpty()) {
             throw new ZephyrException("The description of a find command cannot be empty.");
         }
     }

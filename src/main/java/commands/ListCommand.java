@@ -1,8 +1,8 @@
 package commands;
 
 import controllers.Storage;
-import datastructures.TaskList;
 import controllers.Ui;
+import datastructures.TaskList;
 
 /**
  * Represents a command to list all tasks in the task list.

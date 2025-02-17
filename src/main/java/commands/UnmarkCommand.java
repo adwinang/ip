@@ -1,10 +1,10 @@
 package commands;
 
-import tasks.AbstractTask;
 import controllers.Storage;
-import datastructures.TaskList;
 import controllers.Ui;
+import datastructures.TaskList;
 import exceptions.ZephyrException;
+import tasks.AbstractTask;
 
 /**
  * Represents a command to mark a task as not done in the task list.
@@ -51,8 +51,7 @@ public class UnmarkCommand extends AbstractCommand {
      * This method checks that the arguments are not empty,
      * that exactly one argument is provided, and that the argument is a valid integer.
      *
-     * @throws ZephyrException if the arguments are empty, contain more than one element,
-     * or if the task number is not a valid integer
+     * @throws ZephyrException if there is more or less than a word and the word has to be an integer
      */
     @Override
     public void isValidCommand() throws ZephyrException {

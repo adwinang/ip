@@ -3,18 +3,18 @@ package commands;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import tasks.EventTask;
 import controllers.Storage;
-import datastructures.TaskList;
 import controllers.Ui;
+import datastructures.TaskList;
 import exceptions.ZephyrException;
+import tasks.EventTask;
 
 /**
  * Represents a command to add an EventTask to the task list.
  * The {@code EventCommand} parses the command arguments to extract the event's description,
  * start date (indicated by the "/from" keyword), and end date (indicated by the "/at" keyword).
  * The expected format for the command arguments is:
- * <description> /from <start date> /at <end date>.
+ * "<description> /from <start date> /at <end date>"
  */
 public class EventCommand extends AbstractCommand {
 
@@ -22,7 +22,7 @@ public class EventCommand extends AbstractCommand {
      * Constructs an EventCommand instance with the specified arguments.
      *
      * @param arguments the raw command arguments in the format
-     *                  <description> /from <start date> /at <end date>.
+     * <description> /from <start date> /at <end date>
      */
     public EventCommand(String arguments) {
         super(arguments);
@@ -44,7 +44,7 @@ public class EventCommand extends AbstractCommand {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         isValidCommand();
-        String[] tokens = this.arguments.split(" /from ", 2);
+        String[] tokens = getArguments().split(" /from ", 2);
         String description = tokens[0];
         String[] fromAndAt = tokens[1].split(" /at ", 2);
         try {
@@ -69,17 +69,17 @@ public class EventCommand extends AbstractCommand {
      */
     @Override
     public void isValidCommand() {
-        if (this.arguments.isBlank()) {
+        if (getArguments().isBlank()) {
             throw new ZephyrException("The description of an event cannot be empty.");
         }
-        if (!this.arguments.contains("/from")) {
+        if (!getArguments().contains("/from")) {
             throw new ZephyrException("The event command must contain '/from'.");
         }
-        if (!this.arguments.contains("/at")) {
+        if (!getArguments().contains("/at")) {
             throw new ZephyrException("The event command must contain '/at'.");
         }
 
-        String[] tokens = this.arguments.split(" /from ", 2);
+        String[] tokens = getArguments().split(" /from ", 2);
         if (tokens.length < 2) {
             throw new ZephyrException("The event command must contain a date.");
         }
