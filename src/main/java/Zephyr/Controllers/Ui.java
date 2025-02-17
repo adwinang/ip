@@ -1,8 +1,8 @@
 package Zephyr.Controllers;
 
+import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.io.PrintStream;
 import java.util.List;
 
 import Zephyr.DataStructures.TaskList;
@@ -13,10 +13,14 @@ import Zephyr.Tasks.AbstractTask;
  * and formatting dates for display.
  */
 public class Ui {
+    // CHECKSTYLE:OFF: AbbreviationAsWordInName
     private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
+    // CHECKSTYLE:ON: AbbreviationAsWordInName
     private final FastScanner scanner;
     private final PrintStream output;
+    // CHECKSTYLE:OFF: AbbreviationAsWordInName
     private final String LINE_BREAK = "____________________________________________________________";
+    // CHECKSTYLE:ON: AbbreviationAsWordInName
 
     /**
      * Constructs a new Ui object using standard input and output.
@@ -183,6 +187,11 @@ public class Ui {
         return scanner.nextLine();
     }
 
+    /**
+     * Prints a message indicating that the task list is empty.
+     *
+     * @param tasks the TaskList
+     */
     public void printTaskList(List<AbstractTask> tasks) {
         printBreak();
         println("Here are thine search results:");
