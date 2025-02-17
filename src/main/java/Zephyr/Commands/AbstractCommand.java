@@ -16,7 +16,7 @@ public abstract class AbstractCommand {
     String[] words;
 
     /**
-     * Constructor for AbstractCommand
+     * Constructor for {@code AbstractCommand}
      * Words array is populated with the arguments split by spaces
      *
      * @param arguments Arguments of the command
@@ -28,9 +28,9 @@ public abstract class AbstractCommand {
 
     /**
      * Executes the command
-     * @param tasks TaskList object
-     * @param ui Ui object
-     * @param storage Storage object
+     * @param tasks The {@code TaskList} object
+     * @param ui The {@code Ui} object
+     * @param storage {@code Storage} object
      * @throws ZephyrException if the command is invalid
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws ZephyrException;
@@ -46,7 +46,8 @@ public abstract class AbstractCommand {
 
     /**
      * Checks if remaining arguments are valid
-     * It is not context aware, meaning it does not check if the arguments are valid for Zephyr.TaskList, Zephyr.Controller.Ui or Zephyr.Controller.Storage
+     * It is not context aware, meaning it does not check if
+     * the arguments are valid for {@code TaskList}, {@code Ui} or {@code Storage}
      * @throws ZephyrException if the command is invalid
      */
     public abstract void isValidCommand() throws ZephyrException;
