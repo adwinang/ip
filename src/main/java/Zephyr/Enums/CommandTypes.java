@@ -1,5 +1,9 @@
 package Zephyr;
 
+/**
+ * Represents the available command types for the application.
+ * Each command type is associated with a string value.
+ */
 public enum CommandTypes {
     LIST("list"),
     MARK("mark"),
@@ -12,15 +16,24 @@ public enum CommandTypes {
     BYE("bye"),
     UNKNOWN("unknown");
 
-
     private final String value;
 
-    // Constructor to associate string values
+    /**
+     * Constructs a CommandTypes enum with the specified string value.
+     *
+     * @param value the string representation of the command type
+     */
     CommandTypes(String value) {
         this.value = value;
     }
 
-    // Method to get enum from string
+    /**
+     * Returns the CommandTypes enum that matches the given string value.
+     * The comparison is case-insensitive.
+     *
+     * @param value the string representation of the command type
+     * @return the matching CommandTypes enum, or UNKNOWN if no match is found
+     */
     public static CommandTypes fromValue(String value) {
         for (CommandTypes command : CommandTypes.values()) {
             if (command.value.equalsIgnoreCase(value)) {
@@ -29,5 +42,4 @@ public enum CommandTypes {
         }
         return UNKNOWN;
     }
-
 }

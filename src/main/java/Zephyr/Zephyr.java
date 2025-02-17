@@ -1,7 +1,6 @@
 package Zephyr;
 
 import java.io.IOException;
-
 import Zephyr.Commands.AbstractCommand;
 import Zephyr.Controllers.Parser;
 import Zephyr.Controllers.Storage;
@@ -9,6 +8,11 @@ import Zephyr.Controllers.Ui;
 import Zephyr.Exceptions.ZephyrException;
 import Zephyr.DataStructures.TaskList;
 
+/**
+ * The main class for the Zephyr application.
+ * This class is responsible for initializing the user interface, storage, parser,
+ * and task list, as well as running the main application loop.
+ */
 public class Zephyr {
 
     private final Ui ui;
@@ -16,7 +20,11 @@ public class Zephyr {
     private final Storage storage;
     private final Parser parser;
 
-
+    /**
+     * Constructs a Zephyr application with the specified file path for task storage.
+     *
+     * @param filePath the file path where tasks are stored in markdown format
+     */
     public Zephyr(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -29,6 +37,12 @@ public class Zephyr {
         }
     }
 
+    /**
+     * Runs the main application loop.
+     * This method prints the welcome message, then enters a loop to read user commands,
+     * execute them, and check for an exit command. When an exit command is received,
+     * the loop terminates and the tasks are saved to storage.
+     */
     public void run() {
         ui.printWelcome();
         boolean isExit = false;
@@ -49,6 +63,11 @@ public class Zephyr {
         }
     }
 
+    /**
+     * The main entry point of the Zephyr application.
+     *
+     * @param args command-line arguments (not used)
+     */
     public static void main(String[] args) {
         new Zephyr("data/tasks.md").run();
     }
