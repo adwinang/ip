@@ -18,7 +18,8 @@ public class UnmarkCommand extends AbstractCommand {
             isValidCommand();
             int index = Integer.parseInt(this.words[0]);
             AbstractTask task = tasks.getTask(index - 1);
-
+            task.markAsUndone();
+            
             ui.printTaskUndone(task);
 
         } catch (IndexOutOfBoundsException e) {
