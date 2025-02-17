@@ -27,8 +27,8 @@ public class EventTask extends AbstractTask {
         return this.from;
     }
 
-    public String getTo() {
-        return EventTask.parseDate(this.to);
+    public LocalDate getTo() {
+        return this.to;
     }
 
     @Override
