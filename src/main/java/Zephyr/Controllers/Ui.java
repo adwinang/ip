@@ -84,17 +84,19 @@ public class Ui {
      */
     public void printUnknown() {
         printBreak();
-        println("I do not understand what thou art saying.\n" +
-                "Please enter a valid command using the follow:\n" +
-                "1. list\n" +
-                "2. mark <task number>\n" +
-                "3. unmark <task number>\n" +
-                "4. todo <task description>\n" +
-                "5. deadlineTask <task description> /by <deadlineTask>\n" +
-                "6. eventTask <task description> /from <start time> /to <end time>\n" +
-                "7. upcoming <task type> <days>\n" +
-                "8. delete <task number>\n" +
-                "9. bye - To exit the programme");
+        println("""
+                I do not understand what thou art saying.
+                Please enter a valid command using the follow:
+                1. list
+                2. find <keyword>
+                3. mark <task number>
+                4. unmark <task number>
+                5. todo <task description>
+                6. deadlineTask <task description> /by <deadlineTask>
+                7. eventTask <task description> /from <start time> /to <end time>
+                8. upcoming <task type> <days>
+                9. delete <task number>
+                10. bye - To exit the programme""");
         printBreak();
     }
 
