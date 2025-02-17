@@ -10,17 +10,17 @@ import Zephyr.Controllers.Ui;
 import Zephyr.Exceptions.ZephyrException;
 
 /**
- * Represents a command to add a {@link DeadlineTask} to the task list.
- * The {@code DeadlineCommand} processes a command that includes a task description
+ * Represents a command to add a DeadlineTask to the task list.
+ * The DeadlineCommand processes a command that includes a task description
  * and a deadline date, which is expected to be provided in the format <code>dd MMM yyyy</code>.
  * If the input is invalid, an exception is thrown.
  */
 public class DeadlineCommand extends AbstractCommand {
 
     /**
-     * Constructs a {@code DeadlineCommand} instance.
+     * Constructs a DeadlineCommand instance.
      * The command expects arguments in the format:
-     * {@code <task description> /by <deadline date>}.
+     * <task description> /by <deadline date>.
      *
      * @param arguments The raw arguments passed with the command.
      */
@@ -29,14 +29,14 @@ public class DeadlineCommand extends AbstractCommand {
     }
 
     /**
-     * Executes the deadline command by creating a {@link DeadlineTask}
+     * Executes the deadline command by creating a DeadlineTask
      * and adding it to the task list.
      * The method parses the user input to extract the task description
      * and deadline date. If the date is invalid, an exception is thrown.
      *
-     * @param tasks   The {@link TaskList} where the new task will be added.
-     * @param ui      The {@link Ui} object responsible for user interaction.
-     * @param storage The {@link Storage} object (not used in this command).
+     * @param tasks   The TaskList where the new task will be added.
+     * @param ui      The Ui object responsible for user interaction.
+     * @param storage The Storage object (not used in this command).
      * @throws ZephyrException if the command is invalid or the date format is incorrect.
      */
     @Override
@@ -57,7 +57,7 @@ public class DeadlineCommand extends AbstractCommand {
     }
 
     /**
-     * Validates the {@code DeadlineCommand} arguments.
+     * Validates the DeadlineCommand arguments.
      * This method ensures that the command contains a valid task description
      * and the "/by" keyword separating the task description from the deadline.
      *

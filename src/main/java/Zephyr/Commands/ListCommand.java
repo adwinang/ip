@@ -6,13 +6,13 @@ import Zephyr.Controllers.Ui;
 
 /**
  * Represents a command to list all tasks in the task list.
- * The {@code ListCommand} displays all tasks to the user. It does not require any
+ * The ListCommand displays all tasks to the user. It does not require any
  * additional arguments and simply delegates to the UI to show the tasks.
  */
 public class ListCommand extends AbstractCommand {
 
     /**
-     * Constructs a {@code ListCommand} instance.
+     * Constructs a ListCommand instance.
      * This command does not require any additional arguments.
      *
      * @param arguments the arguments passed with the command (expected to be empty).
@@ -24,11 +24,11 @@ public class ListCommand extends AbstractCommand {
     /**
      * Executes the list command by displaying all tasks in the task list.
      * This method validates the command (although no validation is needed for listing)
-     * and then calls the {@link Ui#showAllTasks(TaskList)} method to display the tasks.
+     * and then calls the Ui.showAllTasks(TaskList) method to display the tasks.
      *
-     * @param tasks   the {@link TaskList} containing the tasks to be listed.
-     * @param ui      the {@link Ui} object responsible for user interaction.
-     * @param storage the {@link Storage} object (not used in this command).
+     * @param tasks   the TaskList containing the tasks to be listed.
+     * @param ui      the Ui object responsible for user interaction.
+     * @param storage the Storage object (not used in this command).
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
@@ -37,7 +37,7 @@ public class ListCommand extends AbstractCommand {
     }
 
     /**
-     * Validates the {@code ListCommand} arguments.
+     * Validates the ListCommand arguments.
      * Since the list command does not require any arguments, no validation is performed.
      */
     @Override

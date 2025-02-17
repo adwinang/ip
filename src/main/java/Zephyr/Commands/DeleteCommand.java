@@ -7,14 +7,14 @@ import Zephyr.Exceptions.ZephyrException;
 
 /**
  * Represents a command to delete a task from the task list.
- * The {@code DeleteCommand} removes a task based on its index
+ * The DeleteCommand removes a task based on its index
  * in the task list. The command expects a valid task number as input.
  * If the input is invalid or out of range, an exception is thrown.
  */
 public class DeleteCommand extends AbstractCommand {
 
     /**
-     * Constructs a {@code DeleteCommand} instance.
+     * Constructs a DeleteCommand instance.
      * The command requires an integer argument representing the task index (1-based).
      *
      * @param arguments The task number to delete.
@@ -29,9 +29,9 @@ public class DeleteCommand extends AbstractCommand {
      * the corresponding task. If the task number is invalid or out of range,
      * an exception is thrown.
      *
-     * @param tasks   The {@link TaskList} from which the task will be deleted.
-     * @param ui      The {@link Ui} object responsible for user interaction.
-     * @param storage The {@link Storage} object (not used in this command).
+     * @param tasks   The TaskList from which the task will be deleted.
+     * @param ui      The Ui object responsible for user interaction.
+     * @param storage The Storage object (not used in this command).
      * @throws ZephyrException if the task number is invalid or out of range.
      */
     @Override
@@ -46,7 +46,7 @@ public class DeleteCommand extends AbstractCommand {
     }
 
     /**
-     * Validates the {@code DeleteCommand} arguments.
+     * Validates the DeleteCommand arguments.
      * This method ensures that the command contains a valid task number.
      * It checks whether the input is empty or contains non-numeric characters.
      *
