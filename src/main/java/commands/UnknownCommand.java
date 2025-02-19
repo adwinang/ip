@@ -31,7 +31,7 @@ public class UnknownCommand extends AbstractCommand {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printUnknown();
+        ui.showUnknown();
     }
 
     /**

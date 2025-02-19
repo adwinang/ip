@@ -42,7 +42,7 @@ public class DeleteCommand extends AbstractCommand {
             throw new ZephyrException("Task number out of range.");
         }
         tasks.deleteTask(taskIndex);
-        ui.printTaskDeleted(tasks.getTask(taskIndex), tasks.getSize());
+        ui.showTaskDeleted(tasks.getTask(taskIndex), tasks.getSize());
     }
 
     /**

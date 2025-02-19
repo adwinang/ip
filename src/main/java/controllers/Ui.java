@@ -1,6 +1,5 @@
 package controllers;
 
-import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
@@ -19,18 +18,14 @@ public class Ui {
     private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
     // CHECKSTYLE:ON: AbbreviationAsWordInName
     private final FastScanner scanner;
-    private final PrintStream output;
-    // CHECKSTYLE:OFF: AbbreviationAsWordInName
-    private final String LINE_BREAK = "____________________________________________________________";
     // CHECKSTYLE:ON: AbbreviationAsWordInName
-    private final Queue<String> queue = new LinkedList<String>();
+    private final Queue<String> queue = new LinkedList<>();
 
     /**
      * Constructs a new Ui object using standard input and output.
      */
     public Ui() {
         this.scanner = new FastScanner();
-        this.output = System.out;
     }
 
     /**
@@ -61,40 +56,31 @@ public class Ui {
     }
 
     /**
-     * Prints a message to the user.
-     *
-     * @param message the message to print
-     */
-    public void println(String message) {
-        queue.add(message);
-    }
-
-    /**
-     * Prints an object's string representation to the user.
+     * Add to queue
      *
      * @param message the object whose string representation is printed
      */
-    public void println(Object message) {
+    public void addQueue(Object message) {
         // String.valueOf() is used to handle null parameters
         // https://stackoverflow.com/questions/27465731/string-valueof-vs-object-tostring
         String strMessage = String.valueOf(message);
-        println(strMessage);
+        queue.add(strMessage);
     }
 
     /**
-     * Prints the welcome message when the program starts.
+     * Show the welcome message when the program starts.
      */
-    public void printWelcome() {
+    public void showWelcome() {
         String content = addBreak("Hello! I'm app.Zephyr\nWhat can I do for thou?");
-        println(content);
+        addQueue(content);
     }
 
     /**
-     * Prints the goodbye message when the program ends.
+     * Show the goodbye message when the program ends.
      */
-    public void printGoodbye() {
+    public void showGoodbye() {
         String content = addBreak("Goodbye! May thou have a safe journey ahead.");
-        println(content);
+        addQueue(content);
     }
 
     /**
@@ -103,22 +89,24 @@ public class Ui {
      * @return Formatted content
      */
     public String addBreak(String content) {
-        return this.LINE_BREAK + "\n" + content + "\n" + this.LINE_BREAK;
+        // CHECKSTYLE:OFF: AbbreviationAsWordInName
+        String lineBreak = "____________________________________________________________";
+        return lineBreak + "\n" + content + "\n" + lineBreak;
     }
 
     /**
      * Format content and add content to queue
      * @param content
      */
-    public void printAndAddBreak(String content) {
+    public void showAndAddBreak(String content) {
         String formattedContent = this.addBreak(content);
         queue.add(formattedContent);
     }
 
     /**
-     * Prints a message indicating that the command is unknown.
+     * Show a message indicating that the command is unknown.
      */
-    public void printUnknown() {
+    public void showUnknown() {
         String content = addBreak("""
                 I do not understand what thou art saying.
                 Please enter a valid command using the follow:
@@ -136,55 +124,55 @@ public class Ui {
     }
 
     /**
-     * Prints an error message indicating a problem occurred while loading a file.
+     * Show an error message indicating a problem occurred while loading a file.
      */
-    public void printLoadingError() {
-        printAndAddBreak("Error loading file. Creating new file.");
+    public void showLoadingError() {
+        showAndAddBreak("Error loading file. Creating new file.");
     }
 
     /**
-     * Prints an error message indicating a problem occurred while saving a file.
+     * Show an error message indicating a problem occurred while saving a file.
      */
-    public void printSavingError() {
-        printAndAddBreak("Error saving file.");
+    public void showSavingError() {
+        showAndAddBreak("Error saving file.");
     }
 
     /**
-     * Prints a message indicating that a task has been added.
+     * Show a message indicating that a task has been added.
      *
      * @param task the task that was added
      */
-    public void printTaskAdded(AbstractTask task) {
-        printAndAddBreak("Got it. I've added this task:\n" + task.toString());
+    public void showTaskAdded(AbstractTask task) {
+        showAndAddBreak("Got it. I've added this task:\n" + task.toString());
     }
 
     /**
-     * Prints a message indicating that a task has been marked as done.
+     * Show a message indicating that a task has been marked as done.
      *
      * @param task the task that was marked as done
      */
-    public void printTaskDone(AbstractTask task) {
-        printAndAddBreak("Nice! I've marked this task as done:\n" + task.toString());
+    public void showTaskDone(AbstractTask task) {
+        showAndAddBreak("Nice! I've marked this task as done:\n" + task.toString());
     }
 
     /**
-     * Prints a message indicating that a task has been deleted.
+     * Show a message indicating that a task has been deleted.
      *
      * @param task the task that was deleted
      * @param size the number of tasks remaining in the list
      */
-    public void printTaskDeleted(AbstractTask task, int size) {
-        printAndAddBreak("Noted. I've removed this task:\n"
+    public void showTaskDeleted(AbstractTask task, int size) {
+        showAndAddBreak("Noted. I've removed this task:\n"
                 + task.toString() + "\nNow thou have " + size + " tasks in the list.");
     }
 
     /**
-     * Prints a message indicating that a task has been unmarked.
+     * Show a message indicating that a task has been unmarked.
      *
      * @param task the task that was unmarked
      */
-    public void printTaskUndone(AbstractTask task) {
-        printAndAddBreak("Pity! I've unmarked this task as done:\n" + task.toString());
+    public void showTaskUndone(AbstractTask task) {
+        showAndAddBreak("Pity! I've unmarked this task as done:\n" + task.toString());
     }
 
     /**
@@ -207,17 +195,17 @@ public class Ui {
     }
 
     /**
-     * Prints a message indicating that the task list is empty.
+     * Show a message indicating that the task list is empty.
      *
      * @param tasks the TaskList
      */
-    public void printTaskList(List<AbstractTask> tasks) {
+    public void showTaskList(List<AbstractTask> tasks) {
         StringBuilder content = new StringBuilder();
         content.append("Here are thine search results:\n");
         for (int i = 0; i < tasks.size(); i++) {
             content.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
         }
-        printAndAddBreak(content.toString());
+        showAndAddBreak(content.toString());
     }
 
     /**
@@ -232,6 +220,6 @@ public class Ui {
             return;
         }
 
-        printAndAddBreak("Here are the tasks in thine list:\n" + tasks.toString());
+        showAndAddBreak("Here are the tasks in thine list:\n" + tasks.toString());
     }
 }

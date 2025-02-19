@@ -40,7 +40,7 @@ public class UnmarkCommand extends AbstractCommand {
             int index = Integer.parseInt(this.getWords()[0]);
             AbstractTask task = tasks.getTask(index - 1);
             task.markAsUndone();
-            ui.printTaskUndone(task);
+            ui.showTaskUndone(task);
         } catch (IndexOutOfBoundsException e) {
             throw new ZephyrException("Task number out of range.");
         }

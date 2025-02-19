@@ -34,7 +34,7 @@ public class ByeCommand extends AbstractCommand {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         isValidCommand();
-        ui.printGoodbye();
+        ui.showGoodbye();
     }
 
     /**

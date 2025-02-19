@@ -50,7 +50,7 @@ public class DeadlineCommand extends AbstractCommand {
             LocalDate byDate = ui.parseDate(by);
             DeadlineTask task = new DeadlineTask(description, byDate);
             tasks.addTask(task);
-            ui.printTaskAdded(task);
+            ui.showTaskAdded(task);
         } catch (DateTimeParseException ex) {
             throw new ZephyrException("Please enter a valid date in the format 'dd MMM yyyy'.");
         }

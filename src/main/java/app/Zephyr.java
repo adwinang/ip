@@ -33,7 +33,7 @@ public class Zephyr {
         try {
             tasks = new TaskList(storage.loadFile());
         } catch (IOException e) {
-            ui.printLoadingError();
+            ui.showLoadingError();
             tasks = new TaskList();
         }
     }
@@ -45,22 +45,25 @@ public class Zephyr {
      * the loop terminates and the tasks are saved to storage.
      */
     public void run() {
-        ui.printWelcome();
+        ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 AbstractCommand c = parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
+                while (ui.queueSize() > 0) {
+                    System.out.println(ui.getOutput());
+                }
                 isExit = c.isExit();
             } catch (ZephyrException e) {
-                ui.println(e.getMessage());
+                ui.addQueue(e.getMessage());
             }
         }
         try {
             storage.saveFile(tasks.getTasks());
         } catch (IOException e) {
-            ui.printSavingError();
+            ui.showSavingError();
         }
     }
 

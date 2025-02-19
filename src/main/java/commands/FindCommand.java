@@ -37,7 +37,7 @@ public class FindCommand extends AbstractCommand {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws ZephyrException {
         List<AbstractTask> foundTasks = tasks.findTasks(this.getArguments());
-        ui.printTaskList(foundTasks);
+        ui.showTaskList(foundTasks);
     }
 
     /**

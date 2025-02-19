@@ -52,7 +52,7 @@ public class EventCommand extends AbstractCommand {
             LocalDate atDate = ui.parseDate(fromAndAt[1]);
             EventTask event = new EventTask(description, fromDate, atDate);
             tasks.addTask(event);
-            ui.printTaskAdded(event);
+            ui.showTaskAdded(event);
         } catch (DateTimeParseException ex) {
             throw new ZephyrException("Please enter a valid date in the format 'dd MMM YYYY'.");
         }

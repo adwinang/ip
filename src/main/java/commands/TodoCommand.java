@@ -38,7 +38,7 @@ public class TodoCommand extends AbstractCommand {
         isValidCommand();
         AbstractTask newTask = new TodoTask(this.getArguments());
         tasks.addTask(newTask);
-        ui.printTaskAdded(newTask);
+        ui.showTaskAdded(newTask);
     }
 
     /**

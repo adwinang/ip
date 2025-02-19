@@ -67,7 +67,7 @@ public class UpcomingCommand extends AbstractCommand {
         }
 
         if (i == 0) {
-            ui.printAndAddBreak("Thou have no upcoming " + taskType + " tasks within the next " + days + " days.");
+            ui.showAndAddBreak("Thou have no upcoming " + taskType + " tasks within the next " + days + " days.");
             return;
         }
 
@@ -86,7 +86,7 @@ public class UpcomingCommand extends AbstractCommand {
                 content.append("    ").append(daysUntilEvent).append(" days until event.");
             }
         }
-        ui.printAndAddBreak(content.toString());
+        ui.showAndAddBreak(content.toString());
     }
 
     /**
