@@ -21,7 +21,7 @@ public class TodoTask extends AbstractTask {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return super.toStringInternal("[T]");
     }
 
     /**

@@ -29,7 +29,7 @@ public class DeadlineTask extends AbstractTask {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.getBy() + ")";
+        return super.toStringInternal("[D]", "(by: " + this.getBy() + ")");
     }
 
     /**
