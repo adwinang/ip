@@ -14,15 +14,15 @@ import tasks.EventTask;
  * The {@code EventCommand} parses the command arguments to extract the event's description,
  * start date (indicated by the "/from" keyword), and end date (indicated by the "/at" keyword).
  * The expected format for the command arguments is:
- * "<description> /from <start date> /at <end date>"
+ * "[description] /from [start date] /at [end date]"
  */
 public class EventCommand extends AbstractCommand {
 
     /**
      * Constructs an EventCommand instance with the specified arguments.
+     * [description] /from [start date] /at [end date]
      *
      * @param arguments the raw command arguments in the format
-     * <description> /from <start date> /at <end date>
      */
     public EventCommand(String arguments) {
         super(arguments);
@@ -45,8 +45,10 @@ public class EventCommand extends AbstractCommand {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         isValidCommand();
         String[] tokens = getArguments().split(" /from ", 2);
+        assert tokens.length > 1;
         String description = tokens[0];
         String[] fromAndAt = tokens[1].split(" /at ", 2);
+        assert fromAndAt.length > 1;
         try {
             LocalDate fromDate = ui.parseDate(fromAndAt[0]);
             LocalDate atDate = ui.parseDate(fromAndAt[1]);
