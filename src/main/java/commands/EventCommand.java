@@ -45,8 +45,10 @@ public class EventCommand extends AbstractCommand {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         isValidCommand();
         String[] tokens = getArguments().split(" /from ", 2);
+        assert tokens.length > 1;
         String description = tokens[0];
         String[] fromAndAt = tokens[1].split(" /at ", 2);
+        assert fromAndAt.length > 1;
         try {
             LocalDate fromDate = ui.parseDate(fromAndAt[0]);
             LocalDate atDate = ui.parseDate(fromAndAt[1]);
