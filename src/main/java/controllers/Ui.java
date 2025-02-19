@@ -93,7 +93,7 @@ public class Ui {
      * @return Formatted content
      */
     public String addBreak(String content) {
-        return this.LINE_BREAK + content + this.LINE_BREAK;
+        return this.LINE_BREAK + "\n" + content + "\n" + this.LINE_BREAK;
     }
 
     /**
