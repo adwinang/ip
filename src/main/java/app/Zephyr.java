@@ -29,7 +29,7 @@ public class Zephyr {
     public Zephyr(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        parser = new Parser(storage, ui);
+        parser = new Parser();
         try {
             tasks = new TaskList(storage.loadFile());
         } catch (IOException e) {

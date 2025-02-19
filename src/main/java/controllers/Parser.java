@@ -20,19 +20,11 @@ import enums.CommandTypes;
  */
 public class Parser {
 
-    private final Ui ui;
-    private final Storage storage;
-
     /**
      * Constructs a new Parser with the given storage and user interface.
      *
-     * @param storage the Storage object used for file operations
-     * @param ui      the Ui object used for user interaction
      */
-    public Parser(Storage storage, Ui ui) {
-        this.ui = ui;
-        this.storage = storage;
-    }
+    public Parser() {}
 
     /**
      * Parses the given user input string into an appropriate command.
