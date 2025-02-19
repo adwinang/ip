@@ -20,7 +20,7 @@ public class DeadlineCommand extends AbstractCommand {
     /**
      * Constructs a DeadlineCommand instance.
      * The command expects arguments in the format
-     * <task description> /by <deadline date>
+     * [task description] /by [deadline date]
      *
      * @param arguments The raw arguments passed with the command.
      */
