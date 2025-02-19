@@ -51,6 +51,16 @@ public class Ui {
     }
 
     /**
+     * Add multiple messages to queue
+     * @param messages vararg format
+     */
+    public void addMultiple(Object... messages) {
+        for (Object message : messages) {
+            queue.add(String.valueOf(message));
+        }
+    }
+
+    /**
      * Prints a message to the user.
      *
      * @param message the message to print
