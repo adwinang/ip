@@ -31,7 +31,8 @@ public class EventTask extends AbstractTask {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.getFrom() + " at: " + this.getTo() + ")";
+        return this.toStringInternal("[E]",
+                "(from: " + this.getFrom() + " at: " + this.getTo() + ")");
     }
 
     /**

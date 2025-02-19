@@ -114,12 +114,13 @@ public class Ui {
                 2. find <keyword>
                 3. mark <task number>
                 4. unmark <task number>
-                5. todo <task description>
-                6. deadlineTask <task description> /by <deadlineTask>
-                7. eventTask <task description> /from <start time> /to <end time>
-                8. upcoming <task type> <days>
-                9. delete <task number>
-                10. bye - To exit the programme""");
+                5. tag <task number> <...tag>
+                6. todo <task description>
+                7. deadlineTask <task description> /by <deadlineTask>
+                8. eventTask <task description> /from <start time> /to <end time>
+                9. upcoming <task type> <days>
+                10. delete <task number>
+                11. bye - To exit the programme""");
         queue.add(content);
     }
 

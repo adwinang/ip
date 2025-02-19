@@ -8,6 +8,7 @@ import commands.EventCommand;
 import commands.FindCommand;
 import commands.ListCommand;
 import commands.MarkCommand;
+import commands.TagCommand;
 import commands.TodoCommand;
 import commands.UnknownCommand;
 import commands.UnmarkCommand;
@@ -39,6 +40,7 @@ public class Parser {
         return switch (CommandTypes.fromValue(command)) {
         case LIST -> new ListCommand(arguments);
         case MARK -> new MarkCommand(arguments);
+        case TAG -> new TagCommand(arguments);
         case UNMARK -> new UnmarkCommand(arguments);
         case TODO -> new TodoCommand(arguments);
         case DEADLINE -> new DeadlineCommand(arguments);

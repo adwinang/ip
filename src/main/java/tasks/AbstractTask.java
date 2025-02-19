@@ -2,6 +2,8 @@ package tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * An abstract representation of a task.
@@ -11,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 public abstract class AbstractTask {
     protected String description;
     protected boolean isDone;
+    protected ArrayList<String> tags;
 
     /**
      * Constructs an AbstractTask with the given description.
@@ -20,6 +23,7 @@ public abstract class AbstractTask {
     public AbstractTask(String description) {
         this.description = description;
         this.isDone = false;
+        this.tags = new ArrayList<>();
     }
 
     /**
@@ -82,6 +86,56 @@ public abstract class AbstractTask {
     }
 
     /**
+     * Adds tag to the task
+     *
+     * @param tags Varargs of tags
+     */
+    public void addTags(String ...tags) {
+        this.tags.addAll(List.of(tags));
+    }
+
+    /**
+     * Get content of tags as a String
+     *
+     * @return Tag Content or empty string if task has no tags
+     */
+    public String getTagsContent() {
+        if (this.tags.isEmpty()) {
+            return "";
+        }
+        StringBuilder tagContents = new StringBuilder();
+        tagContents.append("tags: ");
+        for (String tag : this.tags) {
+            tagContents.append(tag).append(" ");
+        }
+        return tagContents.toString().trim();
+    }
+
+    /**
+     * Internal method for constructing toString for task
+     * @param beforeDescription String to be put before description
+     * @param content String to be put after the description
+     * @return Formatted content
+     */
+    protected String toStringInternal(String beforeDescription, String content) {
+        return "[" + this.getStatusIcon() + "] " + beforeDescription + " "
+                + this.description + " " + content + this.getTagsContent();
+    }
+
+    protected String toStringInternal(String beforeDescription) {
+        return this.toStringInternal(beforeDescription, "");
+    }
+
+    /**
+     * Overloaded function to use for AbstractClass toString
+     *
+     * @return formatted string
+     */
+    protected String toStringInternal() {
+        return this.toStringInternal("", "");
+    }
+
+    /**
      * Returns a String representation of the task.
      * The format includes the status icon and the description.
      *
@@ -89,7 +143,7 @@ public abstract class AbstractTask {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return this.toStringInternal();
     }
 
     /**
@@ -99,7 +153,7 @@ public abstract class AbstractTask {
      * @return the markdown string representation of the task
      */
     protected String toMarkdownStringInternal(String details) {
-        return "- [" + this.getStatusIcon() + "] " + details;
+        return "- [" + this.getStatusIcon() + "] " + details + " tags: " + this.getTagsContent();
     }
 
     /**
