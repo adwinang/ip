@@ -67,27 +67,26 @@ public class UpcomingCommand extends AbstractCommand {
         }
 
         if (i == 0) {
-            ui.printBreak();
-            ui.println("Thou have no upcoming " + taskType + " tasks within the next " + days + " days.");
-            ui.printBreak();
+            ui.printAndAddBreak("Thou have no upcoming " + taskType + " tasks within the next " + days + " days.");
             return;
         }
 
-        ui.printBreak();
-        ui.println("Thou have " + i + " upcoming " + taskType + " tasks within the next " + days + " days.");
+        StringBuilder content = new StringBuilder();
+        content.append("Thou have ").append(i).append(" upcoming ").append(taskType)
+                .append(" tasks within the next ").append(days).append(" days.");
         for (int j = 0; j < i; j++) {
             AbstractTask task = upcomingTasks[j];
             if (taskType.equalsIgnoreCase(task.getTaskType()) && task instanceof DeadlineTask deadlineTask) {
                 long daysUntilDeadline = ChronoUnit.DAYS.between(currentDate, deadlineTask.getBy());
-                ui.println((j + 1) + ". " + deadlineTask);
-                ui.println("    " + daysUntilDeadline + " days until deadline.");
+                content.append((j + 1)).append(". ").append(deadlineTask);
+                content.append("    ").append(daysUntilDeadline).append(" days until deadline.");
             } else if (taskType.equalsIgnoreCase(task.getTaskType()) && task instanceof EventTask eventTask) {
                 long daysUntilEvent = ChronoUnit.DAYS.between(currentDate, eventTask.getFrom());
-                ui.println((j + 1) + ". " + eventTask);
-                ui.println("    " + daysUntilEvent + " days until event.");
+                content.append((j + 1)).append(". ").append(eventTask);
+                content.append("    ").append(daysUntilEvent).append(" days until event.");
             }
         }
-        ui.printBreak();
+        ui.printAndAddBreak(content.toString());
     }
 
     /**

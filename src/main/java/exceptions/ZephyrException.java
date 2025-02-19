@@ -1,7 +1,7 @@
 package exceptions;
 
 /**
- * A custom runtime exception for handling errors in the Zephyr application.
+ * A custom runtime exception for handling errors in the app.Zephyr application.
  */
 public class ZephyrException extends RuntimeException {
     /**

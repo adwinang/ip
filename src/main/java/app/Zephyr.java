@@ -1,3 +1,5 @@
+package app;
+
 import java.io.IOException;
 
 import commands.AbstractCommand;
@@ -8,7 +10,7 @@ import datastructures.TaskList;
 import exceptions.ZephyrException;
 
 /**
- * The main class for the Zephyr application.
+ * The main class for the app.Zephyr application.
  * This class is responsible for initializing the user interface, storage, parser,
  * and task list, as well as running the main application loop.
  */
@@ -20,7 +22,7 @@ public class Zephyr {
     private final Parser parser;
 
     /**
-     * Constructs a Zephyr application with the specified file path for task storage.
+     * Constructs a app.Zephyr application with the specified file path for task storage.
      *
      * @param filePath the file path where tasks are stored in markdown format
      */
@@ -63,7 +65,19 @@ public class Zephyr {
     }
 
     /**
-     * The main entry point of the Zephyr application.
+     * Takes in user input and process it with the existing Zephyr implementations
+     *
+     * @param userInput This is for processing user input
+     * @return Zephyr's response
+     */
+    public String getResponse(String userInput) {
+        AbstractCommand c = parser.parse(userInput);
+        c.execute(tasks, ui, storage);
+        return ui.getOutput();
+    }
+
+    /**
+     * The main entry point of the app.Zephyr application.
      *
      * @param args command-line arguments (not used)
      */

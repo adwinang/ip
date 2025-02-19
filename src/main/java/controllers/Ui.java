@@ -3,7 +3,9 @@ package controllers;
 import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import datastructures.TaskList;
 import tasks.AbstractTask;
@@ -21,6 +23,7 @@ public class Ui {
     // CHECKSTYLE:OFF: AbbreviationAsWordInName
     private final String LINE_BREAK = "____________________________________________________________";
     // CHECKSTYLE:ON: AbbreviationAsWordInName
+    private final Queue<String> queue = new LinkedList<String>();
 
     /**
      * Constructs a new Ui object using standard input and output.
@@ -31,12 +34,29 @@ public class Ui {
     }
 
     /**
+     * Check queue size
+     * @return size of queue
+     */
+    public Integer queueSize() {
+        return queue.size();
+    }
+
+    /**
+     * Return first output in queue
+     *
+     * @return first message
+     */
+    public String getOutput() {
+        return queue.poll();
+    }
+
+    /**
      * Prints a message to the user.
      *
      * @param message the message to print
      */
     public void println(String message) {
-        this.output.println(message);
+        queue.add(message);
     }
 
     /**
@@ -52,43 +72,44 @@ public class Ui {
     }
 
     /**
-     * Starts the user interface by printing the welcome message.
-     */
-    public void start() {
-        printWelcome();
-    }
-
-    /**
      * Prints the welcome message when the program starts.
      */
     public void printWelcome() {
-        printBreak();
-        println("Hello! I'm Zephyr\nWhat can I do for thou?");
-        printBreak();
+        String content = addBreak("Hello! I'm app.Zephyr\nWhat can I do for thou?");
+        println(content);
     }
 
     /**
      * Prints the goodbye message when the program ends.
      */
     public void printGoodbye() {
-        printBreak();
-        println("Goodbye! May thou have a safe journey ahead.");
-        printBreak();
+        String content = addBreak("Goodbye! May thou have a safe journey ahead.");
+        println(content);
     }
 
     /**
-     * Prints a line break.
+     * Add break lines to the content
+     * @param content the input to add break lines
+     * @return Formatted content
      */
-    public void printBreak() {
-        println(LINE_BREAK);
+    public String addBreak(String content) {
+        return this.LINE_BREAK + content + this.LINE_BREAK;
+    }
+
+    /**
+     * Format content and add content to queue
+     * @param content
+     */
+    public void printAndAddBreak(String content) {
+        String formattedContent = this.addBreak(content);
+        queue.add(formattedContent);
     }
 
     /**
      * Prints a message indicating that the command is unknown.
      */
     public void printUnknown() {
-        printBreak();
-        println("""
+        String content = addBreak("""
                 I do not understand what thou art saying.
                 Please enter a valid command using the follow:
                 1. list
@@ -101,21 +122,21 @@ public class Ui {
                 8. upcoming <task type> <days>
                 9. delete <task number>
                 10. bye - To exit the programme""");
-        printBreak();
+        queue.add(content);
     }
 
     /**
      * Prints an error message indicating a problem occurred while loading a file.
      */
     public void printLoadingError() {
-        println("Error loading file. Creating new file.");
+        printAndAddBreak("Error loading file. Creating new file.");
     }
 
     /**
      * Prints an error message indicating a problem occurred while saving a file.
      */
     public void printSavingError() {
-        println("Error saving file.");
+        printAndAddBreak("Error saving file.");
     }
 
     /**
@@ -124,10 +145,7 @@ public class Ui {
      * @param task the task that was added
      */
     public void printTaskAdded(AbstractTask task) {
-        printBreak();
-        println("Got it. I've added this task:");
-        println(task.toString());
-        printBreak();
+        printAndAddBreak("Got it. I've added this task:\n" + task.toString());
     }
 
     /**
@@ -136,10 +154,7 @@ public class Ui {
      * @param task the task that was marked as done
      */
     public void printTaskDone(AbstractTask task) {
-        printBreak();
-        println("Nice! I've marked this task as done:");
-        println(task.toString());
-        printBreak();
+        printAndAddBreak("Nice! I've marked this task as done:\n" + task.toString());
     }
 
     /**
@@ -149,11 +164,8 @@ public class Ui {
      * @param size the number of tasks remaining in the list
      */
     public void printTaskDeleted(AbstractTask task, int size) {
-        printBreak();
-        println("Noted. I've removed this task:");
-        println(task.toString());
-        println("Now thou have " + size + " tasks in the list.");
-        printBreak();
+        printAndAddBreak("Noted. I've removed this task:\n"
+                + task.toString() + "\nNow thou have " + size + " tasks in the list.");
     }
 
     /**
@@ -162,10 +174,7 @@ public class Ui {
      * @param task the task that was unmarked
      */
     public void printTaskUndone(AbstractTask task) {
-        printBreak();
-        println("Pity! I've unmarked this task as done:");
-        println(task.toString());
-        printBreak();
+        printAndAddBreak("Pity! I've unmarked this task as done:\n" + task.toString());
     }
 
     /**
@@ -193,12 +202,12 @@ public class Ui {
      * @param tasks the TaskList
      */
     public void printTaskList(List<AbstractTask> tasks) {
-        printBreak();
-        println("Here are thine search results:");
+        StringBuilder content = new StringBuilder();
+        content.append("Here are thine search results:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            println(i + 1 + ". " + tasks.get(i) + "\n");
+            content.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
         }
-        printBreak();
+        printAndAddBreak(content.toString());
     }
 
     /**
@@ -208,14 +217,11 @@ public class Ui {
      */
     public void showAllTasks(TaskList tasks) {
         if (tasks.getSize() == 0) {
-            printBreak();
-            println("There are no tasks in thine list.");
-            printBreak();
+            String content = addBreak("There are no tasks in thine list.");
+            queue.add(content);
             return;
         }
-        println(LINE_BREAK);
-        println("Here are the tasks in thine list:");
-        println(tasks.toString());
-        println(LINE_BREAK);
+
+        printAndAddBreak("Here are the tasks in thine list:\n" + tasks.toString());
     }
 }
