@@ -37,8 +37,7 @@ public class TagCommand extends AbstractCommand {
         // Exclude the first element as it is the task number
         task.addTags(tags);
 
-        ui.showAndAddBreak("Thou has tagged task " + (taskNumber + 1)
-                + " with " + String.join(" ", tags));
+        ui.showTaggingOfTask(taskNumber, tags);
     }
 
     /**
