@@ -95,15 +95,6 @@ public class Ui {
     }
 
     /**
-     * Format content and add content to queue
-     * @param content
-     */
-    public void showAndAddBreak(String content) {
-        String formattedContent = this.addBreak(content);
-        queue.add(formattedContent);
-    }
-
-    /**
      * Show a message indicating that the command is unknown.
      */
     public void showUnknown() {
@@ -128,14 +119,14 @@ public class Ui {
      * Show an error message indicating a problem occurred while loading a file.
      */
     public void showLoadingError() {
-        showAndAddBreak("Error loading file. Creating new file.");
+        addQueue("Error loading file. Creating new file.");
     }
 
     /**
      * Show an error message indicating a problem occurred while saving a file.
      */
     public void showSavingError() {
-        showAndAddBreak("Error saving file.");
+        addQueue("Error saving file.");
     }
 
     /**
@@ -144,7 +135,7 @@ public class Ui {
      * @param task the task that was added
      */
     public void showTaskAdded(AbstractTask task) {
-        showAndAddBreak("Got it. I've added this task:\n" + task.toString());
+        addQueue("Got it. I've added this task:\n" + task.toString());
     }
 
     /**
@@ -153,7 +144,7 @@ public class Ui {
      * @param task the task that was marked as done
      */
     public void showTaskDone(AbstractTask task) {
-        showAndAddBreak("Nice! I've marked this task as done:\n" + task.toString());
+        addQueue("Nice! I've marked this task as done:\n" + task.toString());
     }
 
     /**
@@ -163,7 +154,7 @@ public class Ui {
      * @param size the number of tasks remaining in the list
      */
     public void showTaskDeleted(AbstractTask task, int size) {
-        showAndAddBreak("Noted. I've removed this task:\n"
+        addQueue("Noted. I've removed this task:\n"
                 + task.toString() + "\nNow thou have " + size + " tasks in the list.");
     }
 
@@ -173,7 +164,7 @@ public class Ui {
      * @param task the task that was unmarked
      */
     public void showTaskUndone(AbstractTask task) {
-        showAndAddBreak("Pity! I've unmarked this task as done:\n" + task.toString());
+        addQueue("Pity! I've unmarked this task as done:\n" + task.toString());
     }
 
     /**
@@ -206,7 +197,7 @@ public class Ui {
         for (int i = 0; i < tasks.size(); i++) {
             content.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
         }
-        showAndAddBreak(content.toString());
+        addQueue(content.toString());
     }
 
     /**
