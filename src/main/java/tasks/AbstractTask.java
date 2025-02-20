@@ -153,7 +153,7 @@ public abstract class AbstractTask {
      * @return the markdown string representation of the task
      */
     protected String toMarkdownStringInternal(String details) {
-        return "- [" + this.getStatusIcon() + "] " + details + " tags: " + this.getTagsContent();
+        return "- [" + this.getStatusIcon() + "] " + details + this.getTagsContent();
     }
 
     /**
