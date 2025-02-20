@@ -221,6 +221,24 @@ public class Ui {
             return;
         }
 
-        showAndAddBreak("Here are the tasks in thine list:\n" + tasks.toString());
+        addQueue("Here are the tasks in thine list:\n" + tasks.toString());
+    }
+
+    /**
+     * Show that the task has been tagged
+     * @param taskNumber User Input for Task Number (starts from 1)
+     * @param tags Array of tags that is added
+     */
+    public void showTaggingOfTask(Integer taskNumber, String[] tags) {
+        this.addQueue("Thou has tagged task " + (taskNumber + 1) + " with " + String.join(" ", tags));
+    }
+
+    /**
+     * Show that there is no upcoming tasks
+     * @param taskType user input for request of task type
+     * @param days number of days in the range
+     */
+    public void showNoUpcomingTasks(String taskType, Integer days) {
+        queue.add("Thou have no upcoming \" + taskType + \" tasks within the next \" + days + \" days.");
     }
 }
