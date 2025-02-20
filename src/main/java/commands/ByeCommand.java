@@ -1,8 +1,11 @@
 package commands;
 
+import java.io.IOException;
+
 import controllers.Storage;
 import controllers.Ui;
 import datastructures.TaskList;
+import exceptions.ZephyrException;
 
 /**
  * Represents the command to terminate the application.
@@ -34,6 +37,12 @@ public class ByeCommand extends AbstractCommand {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         isValidCommand();
+        try {
+            storage.saveFile(tasks.getTasks());
+        } catch (IOException e) {
+            ui.showSavingError();
+            throw new ZephyrException("Unable to load file");
+        }
         ui.showGoodbye();
     }
 

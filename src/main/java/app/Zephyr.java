@@ -60,11 +60,6 @@ public class Zephyr {
                 ui.addQueue(e.getMessage());
             }
         }
-        try {
-            storage.saveFile(tasks.getTasks());
-        } catch (IOException e) {
-            ui.showSavingError();
-        }
     }
 
     /**
