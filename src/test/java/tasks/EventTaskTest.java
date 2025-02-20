@@ -31,7 +31,7 @@ public class EventTaskTest {
         LocalDate to = LocalDate.of(2025, 4, 12);
         EventTask task = new EventTask("Team Building Retreat", from, to);
 
-        String expected = "[E][ ] Team Building Retreat (from: " + from + " at: " + to + ")";
+        String expected = "[ ] [E] Team Building Retreat (from: " + from + " at: " + to + ")";
         assertEquals(expected, task.toString());
     }
 
