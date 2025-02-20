@@ -52,6 +52,9 @@ public class EventCommand extends AbstractCommand {
         try {
             LocalDate fromDate = ui.parseDate(fromAndAt[0]);
             LocalDate atDate = ui.parseDate(fromAndAt[1]);
+            if (atDate.isBefore(fromDate)) {
+                throw new ZephyrException("At date cannot be earlier than from date");
+            }
             EventTask event = new EventTask(description, fromDate, atDate);
             tasks.addTask(event);
             ui.showTaskAdded(event);
@@ -90,5 +93,6 @@ public class EventCommand extends AbstractCommand {
         if (fromAndAt.length < 2) {
             throw new ZephyrException("The event command must contain an at date.");
         }
+
     }
 }
