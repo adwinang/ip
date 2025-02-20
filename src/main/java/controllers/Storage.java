@@ -137,8 +137,19 @@ public class Storage {
         if (line.charAt(7) != ':' || line.charAt(8) != ' ') {
             return null;
         }
+
+        String separator = " #tags ";
+        int lastIndex = line.lastIndexOf(separator);
+        String content;
+        String[] tags = {};
+        if (lastIndex != -1) {
+            content = line.substring(8, lastIndex).trim();
+            tags = line.substring(lastIndex + separator.length()).split(" ");
+        } else {
+            content = line.substring(8).trim();
+        }
+
         // The remainder of the line is the task content.
-        String content = line.substring(8).trim();
         boolean isDone = (checkMark == 'X');
         AbstractTask task;
         task = switch (letter) {
@@ -147,8 +158,14 @@ public class Storage {
         case 'E' -> EventTask.parseString(content);
         default -> null;
         };
-        if (task != null && isDone) {
+        if (task == null) {
+            return null;
+        }
+        if (isDone) {
             task.markAsDone();
+        }
+        if (tags.length > 0) {
+            task.addTags(tags);
         }
         return task;
     }
@@ -161,5 +178,9 @@ public class Storage {
     public static void main(String[] args) throws IOException {
         Storage storage = new Storage("data/tasks.md");
         TaskList tasks = new TaskList(storage.loadFile());
+        Ui ui = new Ui();
+        ui.showAllTasks(tasks);
+        String content = ui.getOutput();
+        System.out.println(content);
     }
 }
