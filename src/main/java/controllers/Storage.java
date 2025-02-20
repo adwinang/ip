@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import datastructures.TaskList;
 import tasks.AbstractTask;
 import tasks.DeadlineTask;
 import tasks.EventTask;
@@ -52,7 +53,11 @@ public class Storage {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String line;
         while ((line = reader.readLine()) != null) {
-            lines.add(parseLine(line));
+            AbstractTask task = parseLine(line);
+            if (task == null) {
+                continue;
+            }
+            lines.add(task);
         }
         reader.close();
         return lines;
@@ -107,7 +112,7 @@ public class Storage {
      */
     AbstractTask parseLine(String line) {
         // Basic length check to avoid StringIndexOutOfBounds; minimum valid format is 9 characters.
-        if (line == null || line.length() < 8) {
+        if (line == null || line.length() < 7) {
             return null;
         }
         // The line must start with "- ["
@@ -120,7 +125,7 @@ public class Storage {
             return null;
         }
         // Verify the closing bracket and following space.
-        if (line.charAt(4) != ' ' || line.charAt(5) != ' ') {
+        if (line.charAt(4) != ']' || line.charAt(5) != ' ') {
             return null;
         }
         // The next character should be a single-letter code representing the task type.
@@ -133,7 +138,7 @@ public class Storage {
             return null;
         }
         // The remainder of the line is the task content.
-        String content = line.substring(9).trim();
+        String content = line.substring(8).trim();
         boolean isDone = (checkMark == 'X');
         AbstractTask task;
         task = switch (letter) {
@@ -146,5 +151,15 @@ public class Storage {
             task.markAsDone();
         }
         return task;
+    }
+
+    /**
+     * main function to test the parsing of file
+     *
+     * @param args main args
+     */
+    public static void main(String[] args) throws IOException {
+        Storage storage = new Storage("data/tasks.md");
+        TaskList tasks = new TaskList(storage.loadFile());
     }
 }
