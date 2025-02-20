@@ -1,5 +1,6 @@
 package app;
 
+import exceptions.ZephyrException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -42,7 +43,12 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = zephyr.getResponse(input);
+        String response;
+        try {
+            response = zephyr.getResponse(input);
+        } catch (ZephyrException e) {
+            response = e.getMessage();
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getZephyrDialog(response, zephyrImage)
