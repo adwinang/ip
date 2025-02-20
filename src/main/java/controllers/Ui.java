@@ -71,7 +71,7 @@ public class Ui {
      * Show the welcome message when the program starts.
      */
     public void showWelcome() {
-        String content = addBreak("Hello! I'm app.Zephyr\nWhat can I do for thou?");
+        String content = "Hello! I'm app.Zephyr\nWhat can I do for thou?";
         addQueue(content);
     }
 
@@ -79,26 +79,15 @@ public class Ui {
      * Show the goodbye message when the program ends.
      */
     public void showGoodbye() {
-        String content = addBreak("Goodbye! May thou have a safe journey ahead.");
+        String content = "Goodbye! May thou have a safe journey ahead.";
         addQueue(content);
-    }
-
-    /**
-     * Add break lines to the content
-     * @param content the input to add break lines
-     * @return Formatted content
-     */
-    public String addBreak(String content) {
-        // CHECKSTYLE:OFF: AbbreviationAsWordInName
-        String lineBreak = "____________________________________________________________";
-        return lineBreak + "\n" + content + "\n" + lineBreak;
     }
 
     /**
      * Show a message indicating that the command is unknown.
      */
     public void showUnknown() {
-        String content = addBreak("""
+        String content = """
                 I do not understand what thou art saying.
                 Please enter a valid command using the follow:
                 1. list
@@ -111,7 +100,7 @@ public class Ui {
                 8. eventTask <task description> /from <start time> /to <end time>
                 9. upcoming <task type> <days>
                 10. delete <task number>
-                11. bye - To exit the programme""");
+                11. bye - To exit the programme""";
         queue.add(content);
     }
 
@@ -207,7 +196,7 @@ public class Ui {
      */
     public void showAllTasks(TaskList tasks) {
         if (tasks.getSize() == 0) {
-            String content = addBreak("There are no tasks in thine list.");
+            String content = "There are no tasks in thine list.";
             queue.add(content);
             return;
         }
