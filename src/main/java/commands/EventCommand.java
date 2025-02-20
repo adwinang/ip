@@ -7,6 +7,7 @@ import controllers.Storage;
 import controllers.Ui;
 import datastructures.TaskList;
 import exceptions.ZephyrException;
+import helpers.StandardDateTime;
 import tasks.EventTask;
 
 /**
@@ -50,8 +51,8 @@ public class EventCommand extends AbstractCommand {
         String[] fromAndAt = tokens[1].split(" /at ", 2);
         assert fromAndAt.length > 1;
         try {
-            LocalDate fromDate = ui.parseDate(fromAndAt[0]);
-            LocalDate atDate = ui.parseDate(fromAndAt[1]);
+            LocalDate fromDate = StandardDateTime.parseDateString(fromAndAt[0]);
+            LocalDate atDate = StandardDateTime.parseDateString(fromAndAt[1]);
             if (atDate.isBefore(fromDate)) {
                 throw new ZephyrException("At date cannot be earlier than from date");
             }

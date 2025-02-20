@@ -3,6 +3,8 @@ package tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+import helpers.StandardDateTime;
+
 /**
  * Represents a task with a deadline.
  * The deadline is specified by a date.
@@ -29,7 +31,8 @@ public class DeadlineTask extends AbstractTask {
      */
     @Override
     public String toString() {
-        return super.toStringInternal("[D]", "(by: " + this.getBy() + ")");
+        return super.toStringInternal("[D]", "(by: "
+                + StandardDateTime.dateToString(this.getBy()) + ")");
     }
 
     /**
@@ -68,7 +71,8 @@ public class DeadlineTask extends AbstractTask {
      * @return the markdown string representation of the deadline task
      */
     public String toMarkdownString() {
-        return this.toMarkdownStringInternal(this.description + " (by: " + this.getBy() + ")");
+        return this.toMarkdownStringInternal(this.description + " (by: "
+                + StandardDateTime.dateToString(this.getBy()) + ")");
     }
 
     /**
@@ -85,7 +89,7 @@ public class DeadlineTask extends AbstractTask {
         String description = details[0];
         String by = details[1].substring(0, details[1].length() - 1);
         try {
-            LocalDate byDate = LocalDate.parse(by, AbstractTask.getFormatter());
+            LocalDate byDate = StandardDateTime.parseDateString(by);
             return new DeadlineTask(description, byDate);
         } catch (DateTimeParseException e) {
             return null;

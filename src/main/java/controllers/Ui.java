@@ -1,12 +1,12 @@
 package controllers;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
 import datastructures.TaskList;
+import helpers.StandardDateTime;
 import tasks.AbstractTask;
 
 /**
@@ -14,8 +14,6 @@ import tasks.AbstractTask;
  * and formatting dates for display.
  */
 public class Ui {
-    // CHECKSTYLE:OFF: AbbreviationAsWordInName
-    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
     // CHECKSTYLE:ON: AbbreviationAsWordInName
     private final FastScanner scanner;
     // CHECKSTYLE:ON: AbbreviationAsWordInName
@@ -154,16 +152,6 @@ public class Ui {
      */
     public void showTaskUndone(AbstractTask task) {
         addQueue("Pity! I've unmarked this task as done:\n" + task.toString());
-    }
-
-    /**
-     * Parses a date string into a LocalDate using the defined date format.
-     *
-     * @param date the date string to parse
-     * @return the LocalDate corresponding to the date string
-     */
-    public LocalDate parseDate(String date) {
-        return LocalDate.parse(date, FORMATTER);
     }
 
     /**

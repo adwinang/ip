@@ -5,6 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import helpers.StandardDateTime;
+
 /**
  * An abstract representation of a task.
  * This class holds a description and a completion status.
@@ -64,16 +66,6 @@ public abstract class AbstractTask {
      */
     public static DateTimeFormatter getFormatter() {
         return DateTimeFormatter.ofPattern("MMMM dd yyyy");
-    }
-
-    /**
-     * Formats the given LocalDate using the defined formatter.
-     *
-     * @param date the LocalDate to format
-     * @return a String representing the formatted date
-     */
-    public static String parseDate(LocalDate date) {
-        return date.format(AbstractTask.getFormatter());
     }
 
     /**

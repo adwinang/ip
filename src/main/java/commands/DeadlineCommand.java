@@ -7,6 +7,7 @@ import controllers.Storage;
 import controllers.Ui;
 import datastructures.TaskList;
 import exceptions.ZephyrException;
+import helpers.StandardDateTime;
 import tasks.DeadlineTask;
 
 /**
@@ -47,7 +48,7 @@ public class DeadlineCommand extends AbstractCommand {
         String by = tokens[1];
 
         try {
-            LocalDate byDate = ui.parseDate(by);
+            LocalDate byDate = StandardDateTime.parseDateString(by);
             DeadlineTask task = new DeadlineTask(description, byDate);
             tasks.addTask(task);
             ui.showTaskAdded(task);

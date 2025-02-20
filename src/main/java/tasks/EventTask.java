@@ -3,6 +3,8 @@ package tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+import helpers.StandardDateTime;
+
 /**
  * Represents an event task with a start and end date.
  */
@@ -82,7 +84,9 @@ public class EventTask extends AbstractTask {
     @Override
     public String toMarkdownString() {
         return this.toMarkdownStringInternal(this.description
-                + " (from: " + this.getFrom() + " at: " + this.getTo() + ")");
+                + " (from: "
+                + StandardDateTime.dateToString(this.getFrom()) + " at: "
+                + StandardDateTime.dateToString(this.getTo()) + ")");
     }
 
     /**
@@ -107,9 +111,9 @@ public class EventTask extends AbstractTask {
             if (!fromTo[1].endsWith(")")) {
                 return null;
             }
-            LocalDate fromDate = LocalDate.parse(from, AbstractTask.getFormatter());
+            LocalDate fromDate = StandardDateTime.parseDateString(from);
             String to = fromTo[1].substring(0, fromTo[1].length() - 1);
-            LocalDate toDate = LocalDate.parse(to, AbstractTask.getFormatter());
+            LocalDate toDate = StandardDateTime.parseDateString(to);
             return new EventTask(description, fromDate, toDate);
         } catch (DateTimeParseException e) {
             return null;

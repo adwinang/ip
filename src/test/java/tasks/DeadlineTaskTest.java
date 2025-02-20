@@ -8,6 +8,8 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
+import helpers.StandardDateTime;
+
 public class DeadlineTaskTest {
 
     @Test
@@ -42,7 +44,7 @@ public class DeadlineTaskTest {
     public void testParseString_valid() {
         LocalDate date = LocalDate.of(2025, 2, 17);
 
-        String input = "Write blog post (by: " + DeadlineTask.parseDate(date) + ")";
+        String input = "Write blog post (by: " + StandardDateTime.dateToString(date) + ")";
 
         DeadlineTask parsedTask = DeadlineTask.parseString(input);
 
