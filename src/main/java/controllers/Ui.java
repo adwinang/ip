@@ -69,7 +69,7 @@ public class Ui {
      * Show the welcome message when the program starts.
      */
     public void showWelcome() {
-        String content = "Hello! I'm app.Zephyr\nWhat can I do for thou?";
+        String content = "Hello! I'm Zephyr\nWhat can I do for thou?";
         addQueue(content);
     }
 

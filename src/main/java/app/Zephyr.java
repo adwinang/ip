@@ -38,6 +38,16 @@ public class Zephyr {
         }
     }
 
+
+    /**
+     * Gets the welcome message
+     * @return Welcome message
+     */
+    public String getWelcome() {
+        ui.showWelcome();
+        return ui.getOutput();
+    }
+
     /**
      * Runs the main application loop.
      * This method prints the welcome message, then enters a loop to read user commands,
@@ -45,7 +55,7 @@ public class Zephyr {
      * the loop terminates and the tasks are saved to storage.
      */
     public void run() {
-        ui.showWelcome();
+        System.out.println(getWelcome());
         boolean isExit = false;
         while (!isExit) {
             try {

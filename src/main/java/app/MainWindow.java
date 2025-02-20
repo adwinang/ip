@@ -34,6 +34,7 @@ public class MainWindow extends AnchorPane {
     /** Injects the Zephyr instance */
     public void setZephyr(Zephyr z) {
         zephyr = z;
+        dialogContainer.getChildren().add(DialogBox.getZephyrDialog(z.getWelcome(), zephyrImage));
     }
 
     /**
