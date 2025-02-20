@@ -94,8 +94,8 @@ public class Ui {
                 4. unmark <task number>
                 5. tag <task number> <...tag>
                 6. todo <task description>
-                7. deadlineTask <task description> /by <deadlineTask>
-                8. eventTask <task description> /from <start time> /to <end time>
+                7. deadline <task description> /by <deadline>
+                8. event <task description> /from <start time> /to <end time>
                 9. upcoming <task type> <days>
                 10. delete <task number>
                 11. bye - To exit the programme""";

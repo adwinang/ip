@@ -34,7 +34,7 @@ public class EventTask extends AbstractTask {
     @Override
     public String toString() {
         return this.toStringInternal("[E]",
-                "(from: " + this.getFrom() + " at: " + this.getTo() + ")");
+                "(from: " + this.getFrom() + " to: " + this.getTo() + ")");
     }
 
     /**
@@ -85,7 +85,7 @@ public class EventTask extends AbstractTask {
     public String toMarkdownString() {
         return this.toMarkdownStringInternal(this.description
                 + " (from: "
-                + StandardDateTime.dateToString(this.getFrom()) + " at: "
+                + StandardDateTime.dateToString(this.getFrom()) + " to: "
                 + StandardDateTime.dateToString(this.getTo()) + ")");
     }
 
@@ -102,7 +102,7 @@ public class EventTask extends AbstractTask {
             return null;
         }
         String description = details[0];
-        String[] fromTo = details[1].split(" at: ", 2);
+        String[] fromTo = details[1].split(" to: ", 2);
         if (fromTo.length < 2) {
             return null;
         }
