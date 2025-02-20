@@ -104,7 +104,7 @@ public abstract class AbstractTask {
             return "";
         }
         StringBuilder tagContents = new StringBuilder();
-        tagContents.append("tags: ");
+        tagContents.append("#tags ");
         for (String tag : this.tags) {
             tagContents.append(tag).append(" ");
         }
@@ -153,7 +153,7 @@ public abstract class AbstractTask {
      * @return the markdown string representation of the task
      */
     protected String toMarkdownStringInternal(String details) {
-        return "- [" + this.getStatusIcon() + "] " + details + this.getTagsContent();
+        return "- [" + this.getStatusIcon() + "] " + details + " " + this.getTagsContent();
     }
 
     /**
