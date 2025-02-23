@@ -5,13 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
-public class EventTaskTest {
+import helpers.StandardDateTime;
 
-    private static final DateTimeFormatter FORMATTER = AbstractTask.getFormatter();
+public class EventTaskTest {
 
     @Test
     public void testConstructorAndGetters() {
@@ -31,7 +30,8 @@ public class EventTaskTest {
         LocalDate to = LocalDate.of(2025, 4, 12);
         EventTask task = new EventTask("Team Building Retreat", from, to);
 
-        String expected = "[ ] [E] Team Building Retreat (from: " + from + " at: " + to + ")";
+        String expected = "[ ] [E] Team Building Retreat (from: " + StandardDateTime.dateToString(from)
+                + " to: " + StandardDateTime.dateToString(to) + ")";
         assertEquals(expected, task.toString());
     }
 
@@ -41,7 +41,8 @@ public class EventTaskTest {
         LocalDate to = LocalDate.of(2025, 5, 18);
         EventTask task = new EventTask("Annual Company Meeting", from, to);
 
-        String expected = "- [ ] E: Annual Company Meeting (from: " + from + " at: " + to + ")";
+        String expected = "- [ ] E: Annual Company Meeting (from: " + StandardDateTime.dateToString(from)
+                + " to: " + StandardDateTime.dateToString(to) + ")";
         assertEquals(expected, task.toMarkdownString());
     }
 
@@ -49,10 +50,10 @@ public class EventTaskTest {
     public void testParseString_valid() {
         LocalDate from = LocalDate.of(2025, 6, 20);
         LocalDate to = LocalDate.of(2025, 6, 25);
-        String formattedFrom = from.format(FORMATTER);
-        String formattedTo = to.format(FORMATTER);
+        String formattedFrom = StandardDateTime.dateToString(from);
+        String formattedTo = StandardDateTime.dateToString(to);
 
-        String input = "Workshop Session (from: " + formattedFrom + " at: " + formattedTo + ")";
+        String input = "Workshop Session (from: " + formattedFrom + " to: " + formattedTo + ")";
 
         EventTask parsedTask = EventTask.parseString(input);
 
@@ -70,22 +71,22 @@ public class EventTaskTest {
 
     @Test
     public void testParseString_invalidDate() {
-        String input = "Some Event (from: invalid-date at: 2025-06-25)";
+        String input = "Some Event (from: invalid-date to: 2025-06-25)";
         assertNull(EventTask.parseString(input), "parseString() should return null for invalid date.");
 
-        input = "Some Event (from: 2025-06-20 at: invalid-date)";
+        input = "Some Event (from: 2025-06-20 to: invalid-date)";
         assertNull(EventTask.parseString(input), "parseString() should return null for invalid date.");
     }
 
     @Test
     public void testParseString_missingToDate() {
         String input = "Networking Event (from: 2025-06-20)";
-        assertNull(EventTask.parseString(input), "parseString() should return null for missing 'at:' part.");
+        assertNull(EventTask.parseString(input), "parseString() should return null for missing 'to:' part.");
     }
 
     @Test
     public void testParseString_missingParenthesis() {
-        String input = "Meeting (from: 2025-06-20 at: 2025-06-22";
+        String input = "Meeting (from: 2025-06-20 to: 2025-06-22";
         assertNull(EventTask.parseString(input), "parseString() should return null if missing closing parenthesis.");
     }
 }

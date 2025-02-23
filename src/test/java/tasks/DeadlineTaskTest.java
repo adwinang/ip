@@ -27,7 +27,7 @@ public class DeadlineTaskTest {
         LocalDate date = LocalDate.of(2025, 2, 17);
         DeadlineTask task = new DeadlineTask("Finish project", date);
 
-        String expected = "[ ] [D] Finish project (by: " + date + ")";
+        String expected = "[ ] [D] Finish project (by: " + StandardDateTime.dateToString(date) + ")";
         assertEquals(expected, task.toString());
     }
 
@@ -36,7 +36,7 @@ public class DeadlineTaskTest {
         LocalDate date = LocalDate.of(2025, 2, 17);
         DeadlineTask task = new DeadlineTask("Complete documentation", date);
 
-        String expected = "- [ ] D: Complete documentation (by: " + date + ")";
+        String expected = "- [ ] D: Complete documentation (by: " + StandardDateTime.dateToString(date) + ")";
         assertEquals(expected, task.toMarkdownString());
     }
 

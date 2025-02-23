@@ -31,7 +31,7 @@ public class TodoTaskTest {
         assertTrue(result.contains("[T]"), "toString should contain [T]");
         assertTrue(result.contains(description), "toString should contain the task description");
         // Without tags, getTagsContent() returns an empty string.
-        assertFalse(result.contains("tags:"), "toString should not contain tags when none are added");
+        assertFalse(result.contains("tags"), "toString should not contain tags when none are added");
     }
 
     /**
@@ -45,8 +45,8 @@ public class TodoTaskTest {
 
         // Add multiple tags.
         task.addTags("urgent", "home");
-        // Expected output: "tags: urgent home"
-        assertEquals("tags: urgent home", task.getTagsContent(), "Tags should be formatted correctly.");
+        // Expected output: "#tags urgent home"
+        assertEquals("#tags urgent home", task.getTagsContent(), "Tags should be formatted correctly.");
     }
 
     /**
@@ -65,7 +65,7 @@ public class TodoTaskTest {
         // which returns "- [ " + "T: " + description + getTagsContent()
         // Verify that both the "T:" prefix and the tags are present.
         assertTrue(markdown.contains("T: " + description), "Markdown should contain the 'T:' prefix and the description.");
-        assertTrue(markdown.contains("tags: urgent home"), "Markdown should contain the tags.");
+        assertTrue(markdown.contains("#tags urgent home"), "Markdown should contain the tags.");
     }
 
     /**
